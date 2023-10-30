@@ -1,6 +1,8 @@
 import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
+import * as dotenv from 'dotenv'
+dotenv.config()
 
 const PORT = 3000
 const app = express()

@@ -2,6 +2,8 @@ import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
+import { Item } from '../../client/models/Items'
+
 dotenv.config()
 
 const PORT = 3000
@@ -12,30 +14,30 @@ app.use(express.json())
 
 // GET request
 
-app.get('/decks', async (req: Request, res: Response) => {
-  const decks = await Deck.find()
-  console.log(decks)
-  res.json(decks)
+app.get('/items', async (req, res) => {
+  const items = await Item.find()
+  console.log(items)
+  res.json(items)
  } )
  
  // POST request.
  
- app.post('/decks', async (req: Request, res: Response) => {
+ app.post('/items', async (req, res) => {
    console.log(req.body)
-   // make a newDeck  for the database.
-   const newDeck = new Deck({
+   // make a newItem  for the database.
+   const newItem = new Item({
      title: req.body.title,
    });
    // saving the newDeck to the database.
-   const createdDeck = await newDeck.save()
-   res.json(createdDeck)
+   const createdItem = await newItem.save()
+   res.json(createdItem)
  })
  
  // delete 
- app.delete('/decks/:deckId', async (req: Request, res: Response) => {
-   const deckId = req.params.deckId
-   const deck = await Deck.findByIdAndDelete(deckId)
-   res.json(deck)
+ app.delete('/items/:itemId', async (req, res) => {
+   const itemId = req.params.itemId
+   const item = await Item.findByIdAndDelete(itemId)
+   res.json(item)
  })
 
 mongoose

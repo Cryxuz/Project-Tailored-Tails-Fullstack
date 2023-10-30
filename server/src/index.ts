@@ -23,11 +23,11 @@ const itemSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  // category: {
-  //   type: String,
-  //   // enum: ['Outfits for Cats', 'Outfits for Dogs', 'Body Piece', 'Full Body', 'Hat'],
-  //   required: true,
-  // },
+  category: {
+    type: String,
+    enum: ['Outfits for Cats', 'Outfits for Dogs', 'Body Piece', 'Full Body', 'Hat'],
+    required: true,
+  },
   price: {
     type: Number,
     required: true,
@@ -66,7 +66,7 @@ app.get('/items', async (req, res) => {
     const newItem = new itemModel({
       name: req.body.name,
       description: req.body.description,
-      // category: req.body.category,
+      category: req.body.category,
       price: req.body.price,
       imageUrl: req.body.imageUrl,
       rating: req.body.rating,

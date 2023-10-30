@@ -2,7 +2,7 @@ import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
-import { Item } from '../../client/models/Items'
+// import { Item } from '../../client/models/Items'
 
 dotenv.config()
 
@@ -12,10 +12,47 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+
+// Items Schema
+const itemSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  // category: {
+  //   type: String,
+  //   // enum: ['Outfits for Cats', 'Outfits for Dogs', 'Body Piece', 'Full Body', 'Hat'],
+  //   required: true,
+  // },
+  price: {
+    type: Number,
+    required: true,
+  },
+  imageUrl: {
+    type: String,
+    required: true,
+  },
+  rating: {
+    type: Number,
+    default: 0,
+  },
+  stock: {
+    type: Number,
+    required: true,
+  },
+
+});
+const itemModel = mongoose.model('Item', itemSchema);
+
+
 // GET request
 
 app.get('/items', async (req, res) => {
-  const items = await Item.find()
+  const items = await itemModel.find()
   console.log(items)
   res.json(items)
  } )
@@ -23,20 +60,32 @@ app.get('/items', async (req, res) => {
  // POST request.
  
  app.post('/items', async (req, res) => {
-   console.log(req.body)
-   // make a newItem  for the database.
-   const newItem = new Item({
-     title: req.body.title,
-   });
-   // saving the newDeck to the database.
-   const createdItem = await newItem.save()
-   res.json(createdItem)
+  try {
+    console.log(req.body)
+    // make a newItem  for the database.
+    const newItem = new itemModel({
+      name: req.body.name,
+      description: req.body.description,
+      // category: req.body.category,
+      price: req.body.price,
+      imageUrl: req.body.imageUrl,
+      rating: req.body.rating,
+      stock: req.body.stock
+    });
+    // saving the newDeck to the database.
+    const createdItem = await newItem.save()
+    res.json(createdItem)
+  } catch (error) {
+    console.log(error)
+    res.status(500)
+  }
+   
  })
  
  // delete 
  app.delete('/items/:itemId', async (req, res) => {
    const itemId = req.params.itemId
-   const item = await Item.findByIdAndDelete(itemId)
+   const item = await itemModel.findByIdAndDelete(itemId)
    res.json(item)
  })
 

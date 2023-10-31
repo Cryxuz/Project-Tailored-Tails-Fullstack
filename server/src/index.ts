@@ -12,7 +12,6 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-
 // Items Schema
 const itemSchema = new mongoose.Schema({
   name: {
@@ -25,7 +24,14 @@ const itemSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    enum: ['Outfits for Cats', 'Outfits for Dogs', 'Body Piece', 'Full Body', 'Hat'],
+    enum: [
+      'Outfits for Cats',
+      'Outfits for Dogs',
+      'Body Piece',
+      'Full Body',
+      'Hat',
+      'Accessories',
+    ],
     required: true,
   },
   price: {
@@ -44,10 +50,8 @@ const itemSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-
-});
-const itemModel = mongoose.model('Item', itemSchema);
-
+})
+const itemModel = mongoose.model('Item', itemSchema)
 
 // GET request
 
@@ -55,11 +59,11 @@ app.get('/items', async (req, res) => {
   const items = await itemModel.find()
   console.log(items)
   res.json(items)
- } )
- 
- // POST request.
- 
- app.post('/items', async (req, res) => {
+})
+
+// POST request.
+
+app.post('/items', async (req, res) => {
   try {
     console.log(req.body)
     // make a newItem  for the database.
@@ -70,28 +74,38 @@ app.get('/items', async (req, res) => {
       price: req.body.price,
       imageUrl: req.body.imageUrl,
       rating: req.body.rating,
-      stock: req.body.stock
-    });
-    // saving the newDeck to the database.
+      stock: req.body.stock,
+    })
+    // saving the newItem to the database.
     const createdItem = await newItem.save()
     res.json(createdItem)
   } catch (error) {
     console.log(error)
     res.status(500)
   }
-   
- })
- 
- // delete 
- app.delete('/items/:itemId', async (req, res) => {
-   const itemId = req.params.itemId
-   const item = await itemModel.findByIdAndDelete(itemId)
-   res.json(item)
- })
+})
 
-mongoose
-.connect(process.env.MONGO_URL!)
-.then(() => {
+// delete
+app.delete('/items/:itemId', async (req, res) => {
+  const itemId = req.params.itemId
+  const item = await itemModel.findByIdAndDelete(itemId)
+  res.json(item)
+})
+
+// sort by category
+
+app.get('/items/category/:category', async (req, res) => {
+  try {
+    const category = req.params.category
+    const items = await itemModel.find({ category: category })
+    res.json(items)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening to port ${PORT}`)
   app.listen(PORT)
 })

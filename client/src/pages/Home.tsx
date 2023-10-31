@@ -3,7 +3,7 @@ return (
   <>
   <h1>Tailored Tails</h1>
   <div>
-    <img src="" alt="" />
+    <img src="/images/bg-home.jpg" alt="" />
   </div>
   </>
 )

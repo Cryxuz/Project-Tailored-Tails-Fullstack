@@ -63,6 +63,9 @@ const Items = () => {
                   <button className='p-2 bg-sky-500 rounded-lg text-white hover:bg-sky-400 mt-4'>View Item</button>
                 </Link>              
               </div>
+              <button className="p-2 bg-sky-500 rounded-lg text-white hover:bg-sky-400">
+                Add To Cart
+              </button>
             </div>
           </div>
         ))}

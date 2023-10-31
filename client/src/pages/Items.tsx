@@ -60,16 +60,20 @@ const Items = () => {
               <p>Price: ${item.price}</p>
               <p>Rating: {item.rating}</p>
               <p>Stock: {item.stock}</p>
-              <div className="flex gap-2 ">
-                <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
-                  Add To Cart
-                </button>
-                <Link to={`/items/${item._id}`}>
+              {item.stock === 0 ? (
+                <p className="text-red-500 text-xl mt-4">Out of stock</p>
+              ) : (
+                <div className="flex gap-2">
                   <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
-                    View Item
+                    Add To Cart
                   </button>
-                </Link>
-              </div>
+                  <Link to={`/items/${item._id}`}>
+                    <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
+                      View Item
+                    </button>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         ))}

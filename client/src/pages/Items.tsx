@@ -20,24 +20,15 @@ const Items = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-2 pt-[5%]">
-        <div className='col-span-1 flex items-center justify-center'>
-        <img className="w-[80%] rounded-lg" src="/images/items-page.jpg" alt="" />
+      <div className="grid grid-cols-2 pt-[5%] mx-10 mb-10">
+        <div className='col-span-1 flex items-center justify-center bg-cyan-100'>
+        <img className="w-[60%] rotate-[-15deg] rounded-lg" src="/images/items-page.jpg" alt="" />
         </div>
-        <div className='col-span-2'>
+        <div className='col-span bg-cyan-50 p-10'>
           <h2 className="text-5xl px-[3%]">Costumes, Hats, Accessories & More!</h2>
+          <br />
           <p className="text-xl p-[3%]">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-            Perspiciatis a, sint soluta corrupti sed aperiam amet iure. Magnam
-            doloremque cum distinctio animi recusandae assumenda, minima
-            delectus debitis ex, temporibus dolor. Tempore autem eos neque!
-            Tenetur eaque natus, inventore pariatur beatae nisi quisquam aut
-            optio itaque, reprehenderit eligendi, ipsa repudiandae. Soluta
-            exercitationem fugit facere esse at magni dignissimos, placeat ipsam
-            excepturi. Dignissimos iste ducimus vitae dolorem dolore dicta.
-            Provident neque molestias vero unde cumque esse facilis illum.
-            Consectetur, magnam quos praesentium, aperiam molestias sint quae
-            explicabo ipsa ratione sequi minima odio.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum eligendi aliquid, fugiat assumenda dicta amet quas animi iure repudiandae? Impedit, illo cum id eligendi sapiente ducimus veniam aperiam maiores ratione.
           </p>
         </div>
       </div>

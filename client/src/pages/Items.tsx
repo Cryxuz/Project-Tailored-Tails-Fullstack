@@ -7,7 +7,7 @@ const Items = () => {
 
   useEffect(() => {
     axios
-      .get<ItemInterface[]>('/items')
+      .get<ItemInterface[]>('http://localhost:3000/items')
       .then((response) => {
         console.log(response.data)
         setItems(response.data)

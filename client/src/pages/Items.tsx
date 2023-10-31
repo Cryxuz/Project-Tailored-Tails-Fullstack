@@ -20,7 +20,7 @@ const Items = () => {
   return (
     <div>
       <div className="grid grid-cols-2 gap-2 ">
-        <img className="" src="/images/items-page.jpg" alt="" />
+        <img className="w-[50%]" src="/images/items-page.jpg" alt="" />
         <div>
           <h2 className="text-7xl pt-[8%] px-[3%]">Items</h2>
           <p className="text-2xl p-[3%]">

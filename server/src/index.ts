@@ -61,6 +61,15 @@ app.get('/items', async (req, res) => {
   res.json(items)
 })
 
+//  GET by ID
+
+app.get('/items/:itemId', async (req, res) => {
+  const itemId = req.params.itemId
+  const item = await itemModel.findById(itemId)
+  console.log(item)
+  res.json(item)
+})
+
 // POST request.
 
 app.post('/items', async (req, res) => {

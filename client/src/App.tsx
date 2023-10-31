@@ -5,20 +5,21 @@ import Items from './pages/Items'
 import Cart from './pages/Cart'
 import Navbar from './components/Navbar'
 import { Outlet } from 'react-router-dom'
+import Footer from './components/Footer'
 
 const App = () => {
-  
   return (
     <div>
       <Navbar />
       <Routes>
-      <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/items" element={<Items />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
       <main className="container mx-auto p-4">
         <Outlet />
       </main>
+      <Footer />
     </div>
   )
 }

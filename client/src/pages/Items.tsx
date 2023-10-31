@@ -57,10 +57,10 @@ const Items = () => {
             <div className="mt-2">
               <p>Rating: {item.rating}</p>
               <p>Stock: {item.stock}</p>
-              <div className='flex gap-2 justify-center'>
-                <button className='p-2 bg-sky-500 rounded-lg text-white hover:bg-sky-400 mt-4'>Add To Cart</button>
+              <div className='flex gap-2 '>
+                <button className='p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4'>Add To Cart</button>
                 <Link to={`/items/${item._id}`}>
-                  <button className='p-2 bg-sky-500 rounded-lg text-white hover:bg-sky-400 mt-4'>View Item</button>
+                  <button className='p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4'>View Item</button>
                 </Link>              
               </div>
             </div>

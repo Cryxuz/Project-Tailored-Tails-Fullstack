@@ -22,7 +22,7 @@ const Cart = () => {
         <p>PayPal</p>
         <p>Online EFTPOS</p>
         <p>Payment on collection from Fake Adress, Auckland</p>
-        <button className="p-2 bg-sky-500 hover:bg-sky-400 rounded-lg text-white">Checkout</button>
+        <button className="p-2 bg-orange-600 hover:bg-orange-500 rounded-lg text-white">Checkout</button>
       </div>
       
     </div>

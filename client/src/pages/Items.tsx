@@ -54,7 +54,9 @@ const Items = () => {
             <div className="mt-2">
               <p>Rating: {item.rating}</p>
               <p>Stock: {item.stock}</p>
-              <button className='p-2 bg-sky-500 rounded-lg text-white hover:bg-sky-400'>Add To Cart</button>
+              <button className="p-2 bg-sky-500 rounded-lg text-white hover:bg-sky-400">
+                Add To Cart
+              </button>
             </div>
           </div>
         ))}

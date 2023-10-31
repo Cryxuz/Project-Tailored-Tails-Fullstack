@@ -11,11 +11,11 @@ const App = () => {
     <div>
       <Navbar />
 
-      {/* <Routes>
-       <Route path="/" element={<Home />} />
-     <Route path="/items" element={<Items />} />
-      <Route path="/cart" element={<Cart />} />
-    </Routes> */}
+      <Routes>
+      <Route path="/" element={<Home />} />
+        <Route path="/items" element={<Items />} />
+          <Route path="/cart" element={<Cart />} />
+      </Routes>
       <main className="container mx-auto p-4">
         <Outlet />
       </main>

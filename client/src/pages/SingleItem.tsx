@@ -31,9 +31,9 @@ function SingleItem () {
 return (
   <div>
     <button onClick={() => navigate(-1)} className='py-2 px-4 bg-orange-600 rounded-lg text-white hover:bg-orange-500 m-[4%]'>Previous Page</button>
-    <div className="grid grid-cols-2 mx-[5%] gap-[2%]">
-      <div className="flex items-center justify-center">
-        <img className="rounded-md" src={item.imageUrl} alt=""/>
+    <div className="md:grid md:grid-cols-2 mx-[5%] gap-[2%]">
+      <div className="flex items-center justify-center ">
+        <img className="rounded-md py-[5%]" src={item.imageUrl} alt=""/>
       </div>
       <div className="">
         <h2 className="font-bold text-2xl">{item.name}</h2>

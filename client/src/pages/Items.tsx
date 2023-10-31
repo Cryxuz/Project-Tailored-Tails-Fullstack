@@ -76,7 +76,18 @@ const Items = () => {
                 return "Not rated";
             }
           })()}
-              <p><span className="font-medium text-lg">Stock:</span> {item.stock}</p>
+              <p>
+                <span className="font-medium text-lg">Stock:</span>{" "}
+                <span
+                  className={
+                    item.stock === 0
+                      ? "text-red-500" 
+                      : "text-green-700"
+                  }
+                >
+                  {item.stock === 0 ? "Out of Stock" : "In Stock"}
+                </span>
+              </p>
               <div className='flex gap-2 '>
                 <button className='p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4'>Add To Cart</button>
                 <Link to={`/items/${item._id}`}>

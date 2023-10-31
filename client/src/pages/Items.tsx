@@ -17,7 +17,7 @@ const Items = () => {
         console.error('Error fetching items:', error)
       })
   }, [])
-
+  console.log(items[1])
   return (
     <div>
       <div className="grid grid-cols-2 pt-[5%] mx-10 mb-10">
@@ -44,6 +44,7 @@ const Items = () => {
       </div>
       <div className="grid grid-cols-3 gap-6  p-16 ">
         {items.map((item) => (
+          
           <div key={item._id} className="border rounded-lg p-8 flex flex-col ">
             <h2 className="text-xl font-semibold">{item.name}</h2>
             <div className="flex-grow "></div>
@@ -91,3 +92,4 @@ const Items = () => {
 }
 
 export default Items
+

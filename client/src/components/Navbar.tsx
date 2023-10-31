@@ -4,7 +4,7 @@ const Navbar = () => {
   return (
     <nav className="bg-sky-200 py-6">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="text-cyan-800 text-4xl font-semibold cursive"><img src="" alt="" />Tailored Tails</div>
+        <div className="text-cyan-800 text-4xl font-semibold cursive"><img className='inline pr-5' src="/images/logo.png" alt="" />Tailored Tails</div>
         <div className="space-x-10">
           <Link to="/" className="text-cyan-800 font-semibold hover:underline merriweather text-xl">
             Home

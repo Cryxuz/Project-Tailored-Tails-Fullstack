@@ -27,6 +27,7 @@ const Items = () => {
         <div className='col-span bg-cyan-50 p-10'>
           <h2 className="text-5xl px-[3%]">Costumes, Hats, Accessories & More!</h2>
           <br />
+         
           <p className="text-xl p-[3%]">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum eligendi aliquid, fugiat assumenda dicta amet quas animi iure repudiandae? Impedit, illo cum id eligendi sapiente ducimus veniam aperiam maiores ratione.
           </p>
@@ -36,8 +37,6 @@ const Items = () => {
         {items.map((item) => (
           <div key={item._id} className="border rounded-lg p-8 flex flex-col ">
             <h2 className="text-xl font-semibold">{item.name}</h2>
-            <p>{item.description}</p>
-            
             <div className="flex-grow "></div>
             <div className='flex justify-center '>
             <img
@@ -47,10 +46,26 @@ const Items = () => {
             />
             </div>
             <div className="mt-2">
-            <p>Category: {item.category}</p>
-            <p>Price: ${item.price}</p>
-              <p>Rating: {item.rating}</p>
-              <p>Stock: {item.stock}</p>
+            <p><span className="font-medium text-lg">Category:</span> {item.category}</p>
+            <p><span className="font-medium text-lg">Price:</span> ${item.price}</p>
+            <p><span className="font-medium text-lg">Rating:</span> </p>
+              {(() => {
+            switch (item.rating) {
+              case 1:
+                return "★☆☆☆☆";
+              case 2:
+                return "★★☆☆☆";
+              case 3:
+                return "★★★☆☆";
+              case 4:
+                return "★★★★☆";
+              case 5:
+                return "★★★★★";
+              default:
+                return "Not rated";
+            }
+          })()}
+              <p><span className="font-medium text-lg">Stock:</span> {item.stock}</p>
               <div className='flex gap-2 '>
                 <button className='p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4'>Add To Cart</button>
                 <Link to={`/items/${item._id}`}>

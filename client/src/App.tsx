@@ -5,6 +5,7 @@ import Items from './pages/Items'
 import Cart from './pages/Cart'
 import Navbar from './components/Navbar'
 import { Outlet } from 'react-router-dom'
+import SingleItem from './pages/SingleItem'
 
 const App = () => {
   
@@ -15,6 +16,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
         <Route path="/items" element={<Items />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/items/:itemId" element={<SingleItem />} />
       </Routes>
       <main className="container mx-auto p-4">
         <Outlet />

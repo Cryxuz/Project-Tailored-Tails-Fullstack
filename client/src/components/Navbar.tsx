@@ -12,10 +12,10 @@ const Navbar = () => {
           <Link to="/items" className="text-white hover:text-gray-300">
             Items
           </Link>
-          <Link to="/cart" className="text-white hover:text-gray-300">
+          <Link to="/category" className="text-white hover:text-gray-300">
             Category
           </Link>
-          <Link to="/category" className="text-white hover:text-gray-300">
+          <Link to="/cart" className="text-white hover:text-gray-300">
             Cart
           </Link>
         </div>

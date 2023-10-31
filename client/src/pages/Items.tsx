@@ -38,24 +38,26 @@ const Items = () => {
           </p>
         </div>
       </div>
-      <div>
-        <ul>
-          {items.map((item) => (
-            <li key={item._id}>
-              <h2>{item.name}</h2>
-              <p>{item.description}</p>
-              <p>Category: {item.category}</p>
-              <p>Price: ${item.price}</p>
-              <img
-                src={item.imageUrl}
-                alt={item.name}
-                style={{ maxWidth: '200px' }}
-              />
+      <div className="grid grid-cols-4 gap-6 p-12">
+        {items.map((item) => (
+          <div key={item._id} className="border p-4 flex flex-col">
+            <h2 className="text-xl font-semibold">{item.name}</h2>
+            <p>{item.description}</p>
+            <p>Category: {item.category}</p>
+            <p>Price: ${item.price}</p>
+            <div className="flex-grow"></div>
+            <img
+              src={item.imageUrl}
+              alt={item.name}
+              className="max-w-full h-[200px]"
+            />
+            <div className="mt-2">
               <p>Rating: {item.rating}</p>
               <p>Stock: {item.stock}</p>
-            </li>
-          ))}
-        </ul>
+              <button className='p-2 bg-sky-500 rounded-lg text-white hover:bg-sky-400'>Add To Cart</button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   )

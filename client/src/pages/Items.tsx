@@ -20,10 +20,10 @@ const Items = () => {
   console.log(items[1])
   return (
     <div>
-      <div className="grid grid-cols-2 pt-[5%] mx-10 mb-10">
+      <div className="md:grid md:grid-cols-2 pt-[5%] mx-10 mb-10">
         <div className="col-span-1 flex items-center justify-center bg-cyan-100">
           <img
-            className="w-[60%] rotate-[-15deg] rounded-lg"
+            className="w-[70%] md:w-[80%] lg:w-[60%] rotate-[-15deg] rounded-lg"
             src="/images/items-page.jpg"
             alt=""
           />

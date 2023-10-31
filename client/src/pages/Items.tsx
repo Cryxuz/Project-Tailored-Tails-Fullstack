@@ -32,20 +32,23 @@ const Items = () => {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-6 p-12">
+      <div className="grid grid-cols-3 gap-6  p-16 ">
         {items.map((item) => (
-          <div key={item._id} className="border rounded-lg p-4 flex flex-col  justify-center items-center">
+          <div key={item._id} className="border rounded-lg p-8 flex flex-col ">
             <h2 className="text-xl font-semibold">{item.name}</h2>
             <p>{item.description}</p>
-            <p>Category: {item.category}</p>
-            <p>Price: ${item.price}</p>
-            <div className="flex-grow"></div>
+            
+            <div className="flex-grow "></div>
+            <div className='flex justify-center '>
             <img
               src={item.imageUrl}
               alt={item.name}
-              className="max-w-full h-[200px]"
+              className="w-[300px] h-[200px] m-4 rounded-md"
             />
+            </div>
             <div className="mt-2">
+            <p>Category: {item.category}</p>
+            <p>Price: ${item.price}</p>
               <p>Rating: {item.rating}</p>
               <p>Stock: {item.stock}</p>
               <div className='flex gap-2 '>

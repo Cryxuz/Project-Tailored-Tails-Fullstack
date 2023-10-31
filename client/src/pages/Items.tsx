@@ -32,9 +32,9 @@ const Items = () => {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-4 gap-6 p-12">
+      <div className="grid grid-cols-3 gap-6 p-12">
         {items.map((item) => (
-          <div key={item._id} className="border rounded-lg p-4 flex flex-col">
+          <div key={item._id} className="border rounded-lg p-4 flex flex-col  justify-center items-center">
             <h2 className="text-xl font-semibold">{item.name}</h2>
             <p>{item.description}</p>
             <p>Category: {item.category}</p>

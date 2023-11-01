@@ -158,6 +158,20 @@ app.post('/cartitems', async (req, res) => {
   }
 })
 
+app.delete('/cartitems/:id', async (req, res) => {
+  const itemId = req.params.id
+  try {
+    const deletedCartItem = await cartItem.findByIdAndDelete(itemId)
+    if (!deletedCartItem) {
+      return res.status(404).json({ error: 'Cart item not found' })
+    }
+    res.json(deletedCartItem)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening to port ${PORT}`)
   app.listen(PORT)

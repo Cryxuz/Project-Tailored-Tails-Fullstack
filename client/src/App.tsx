@@ -11,7 +11,7 @@ import SingleItem from './pages/SingleItem'
 const App = () => {
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/items" element={<Items />} />

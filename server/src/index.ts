@@ -128,6 +128,36 @@ app.get('/cartitems', async (req, res) => {
   }
 })
 
+app.post('/cartitems', async (req, res) => {
+  try {
+    const {
+      user_id,
+      item_id,
+      quantity,
+      price,
+      total_price,
+      name,
+      description,
+      image_url,
+    } = req.body
+    const newCartItem = new cartItem({
+      user_id,
+      item_id,
+      quantity,
+      price,
+      total_price,
+      name,
+      description,
+      image_url,
+    })
+    await newCartItem.save()
+    res.status(201).json(newCartItem)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
 mongoose.connect(process.env.MONGO_URL!).then(() => {
   console.log(`listening to port ${PORT}`)
   app.listen(PORT)

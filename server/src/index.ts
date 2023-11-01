@@ -3,6 +3,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 // import { Item } from '../../client/models/Items'
+import cartItem from './schemas/cartItem'
 
 dotenv.config()
 
@@ -110,6 +111,19 @@ app.get('/items/category/:category', async (req, res) => {
     res.json(items)
   } catch (error) {
     console.error(error)
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+// Cart
+
+app.get('/cartitems', async (req, res) => {
+  try {
+    const cartitems = await cartItems.find()
+    console.log(cartitems)
+    res.json(cartitems)
+  } catch (error) {
+    console.log(error)
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })

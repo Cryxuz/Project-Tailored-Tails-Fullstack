@@ -136,8 +136,19 @@ return (
         <p><span className="font-medium text-lg">Dimension:</span> 50-60 cm</p>
         <p><span className="font-medium text-lg">Superior Material:</span> Made of breathable,soft and skin-friendly cotton and polyester fiber.</p>
         <p><span className="font-medium text-lg">Used Widley:</span> Suitable for all house pets</p>
-        <button className='p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4'>Add To Cart</button>
-
+        {item.stock > 0 ? (
+                <div className="flex gap-2">
+                  <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
+                    Add To Cart
+                  </button>
+                </div>
+              ) : (
+                <div className="flex gap-2">
+                  <div className="p-2 bg-red-600 rounded-lg text-white mt-4">
+                    Out of Stock
+                  </div>
+                </div>
+              )}
       </div>
       <div>    
       </div>

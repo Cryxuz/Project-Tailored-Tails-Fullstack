@@ -104,7 +104,7 @@ const Items = () => {
                 </div>
               ) : (
                 <div className="flex gap-2">
-                  <div className="p-2 bg-orange-600 rounded-lg text-white mt-4">
+                  <div className="p-2 bg-red-600 rounded-lg text-white mt-4">
                     Out of Stock
                   </div>
                   <Link to={`/items/${item._id}`}>

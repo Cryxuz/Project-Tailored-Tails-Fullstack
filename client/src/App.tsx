@@ -7,6 +7,7 @@ import Navbar from './components/Navbar'
 import { Outlet } from 'react-router-dom'
 import Footer from './components/Footer'
 import SingleItem from './pages/SingleItem'
+
 const App = () => {
   return (
     <div>

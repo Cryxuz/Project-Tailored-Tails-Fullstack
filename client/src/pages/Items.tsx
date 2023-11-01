@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 
 const Items = () => {
   const [items, setItems] = useState<ItemInterface[]>([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 5
 
   useEffect(() => {
     axios
@@ -17,6 +19,12 @@ const Items = () => {
         console.error('Error fetching items:', error)
       })
   }, [])
+
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem)
+
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
   return (
     <div>
@@ -41,12 +49,12 @@ const Items = () => {
           </p>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-6  p-16 ">
-        {items.map((item) => (
-          <div key={item._id} className="border rounded-lg p-8 flex flex-col ">
+      <div className="grid grid-cols-3 gap-6 p-16">
+        {currentItems.map((item) => (
+          <div key={item._id} className="border rounded-lg p-8 flex flex-col">
             <h2 className="text-xl font-semibold">{item.name}</h2>
             <div className="flex-grow"></div>
-            <div className="flex justify-center ">
+            <div className="flex justify-center">
               <img
                 src={item.imageUrl}
                 alt={item.name}
@@ -117,6 +125,23 @@ const Items = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="flex justify-center mt-4">
+        <button
+          className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg mr-2"
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          Previous
+        </button>
+        <button
+          className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg"
+          onClick={() => paginate(currentPage + 1)}
+          disabled={indexOfLastItem >= items.length}
+        >
+          Next
+        </button>
       </div>
     </div>
   )

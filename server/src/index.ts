@@ -3,7 +3,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 // import { Item } from '../../client/models/Items'
-import cartItem from './schemas/cartItem'
+// import cartItem from './schemas/cartSchema'
 
 dotenv.config()
 
@@ -53,6 +53,55 @@ const itemSchema = new mongoose.Schema({
   },
 })
 const itemModel = mongoose.model('Item', itemSchema)
+
+// Cart Schema
+
+const cartItemSchema = new mongoose.Schema({
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+  item_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  price: {
+    // Represents a single item
+    type: Number,
+    required: true,
+  },
+  total_price: {
+    // Total cost of each item in cart
+    type: Number,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  image_url: {
+    type: String,
+    required: true,
+  },
+  timestamp: {
+    type: Date,
+    default: Date.now,
+  },
+  is_active: {
+    type: Boolean,
+    default: true,
+  },
+})
+
+const cartItem = mongoose.model('CartItem', cartItemSchema)
 
 // GET request
 
@@ -119,11 +168,55 @@ app.get('/items/category/:category', async (req, res) => {
 
 app.get('/cartitems', async (req, res) => {
   try {
-    const cartitems = await cartItems.find()
+    const cartitems = await cartItem.find()
     console.log(cartitems)
     res.json(cartitems)
   } catch (error) {
     console.log(error)
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+app.post('/cartitems', async (req, res) => {
+  try {
+    const {
+      user_id,
+      item_id,
+      quantity,
+      price,
+      total_price,
+      name,
+      description,
+      image_url,
+    } = req.body
+    const newCartItem = new cartItem({
+      user_id,
+      item_id,
+      quantity,
+      price,
+      total_price,
+      name,
+      description,
+      image_url,
+    })
+    await newCartItem.save()
+    res.status(201).json(newCartItem)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: 'Internal Server Error' })
+  }
+})
+
+app.delete('/cartitems/:id', async (req, res) => {
+  const itemId = req.params.id
+  try {
+    const deletedCartItem = await cartItem.findByIdAndDelete(itemId)
+    if (!deletedCartItem) {
+      return res.status(404).json({ error: 'Cart item not found' })
+    }
+    res.json(deletedCartItem)
+  } catch (error) {
+    console.error(error)
     res.status(500).json({ error: 'Internal Server Error' })
   }
 })

@@ -3,10 +3,27 @@ import { useState, useEffect } from "react"
 import { ItemInterface } from "../interfaces/iteminterface"
 import { useNavigate, useParams } from "react-router-dom"
 
-function SingleItem () {
+function SingleItem ({
+  
+  width,
+  height,
+  magnifierHeight = 150,
+  magnifieWidth = 150,
+  zoomLevel = 1.5
+}: {
+  
+  width?: string;
+  height?: string;
+  magnifierHeight?: number;
+  magnifieWidth?: number;
+  zoomLevel?: number;
+}) {
 
   const navigate = useNavigate();
 
+  const [[x, y], setXY] = useState([0, 0]);
+  const [[imgWidth, imgHeight], setSize] = useState([0, 0]);
+  const [showMagnifier, setShowMagnifier] = useState(false);
  
 
   const { itemId } = useParams()
@@ -33,7 +50,59 @@ return (
     <button onClick={() => navigate(-1)} className='py-2 px-4 bg-orange-600 rounded-lg text-white hover:bg-orange-500 m-[4%]'>Previous Page</button>
     <div className="md:grid md:grid-cols-2 mx-[5%] gap-[2%]">
       <div className="flex items-center justify-center ">
-        <img className="rounded-md py-[5%]" src={item.imageUrl} alt=""/>
+      <div
+      style={{
+        position: "relative",
+        height: height,
+        width: width
+      }}
+    >
+      <p className="text-bold text-lg">Hover image to magnify</p>
+      <img
+        src={item.imageUrl}
+        style={{ height: height, width: width }}
+        onMouseEnter={(e) => {          
+          const elem = e.currentTarget;
+          const { width, height } = elem.getBoundingClientRect();
+          setSize([width, height]);
+          setShowMagnifier(true);
+        }}
+        onMouseMove={(e) => {
+          const elem = e.currentTarget;
+          const { top, left } = elem.getBoundingClientRect();
+          const x = e.pageX - left - window.pageXOffset;
+          const y = e.pageY - top - window.pageYOffset;
+          setXY([x, y]);
+        }}
+        onMouseLeave={() => {
+
+          setShowMagnifier(false);
+        }}
+        alt={"img"}
+      />
+      <div
+        style={{
+          display: showMagnifier ? "" : "none",
+          position: "absolute",
+          pointerEvents: "none",
+          height: `${magnifierHeight}px`,
+          width: `${magnifieWidth}px`,
+          top: `${y - magnifierHeight / 2}px`,
+          left: `${x - magnifieWidth / 2}px`,
+          opacity: "1", 
+          border: "1px solid lightgray",
+          backgroundColor: "white",
+          backgroundImage: `url('${item.imageUrl}')`,
+          backgroundRepeat: "no-repeat",
+          borderRadius: "50%",
+          backgroundSize: `${imgWidth * zoomLevel}px ${
+            imgHeight * zoomLevel
+          }px`,
+          backgroundPositionX: `${-x * zoomLevel + magnifieWidth / 2}px`,
+          backgroundPositionY: `${-y * zoomLevel + magnifierHeight / 2}px`
+        }}
+      ></div>
+    </div>
       </div>
       <div className="">
         <h2 className="font-bold text-2xl">{item.name}</h2>

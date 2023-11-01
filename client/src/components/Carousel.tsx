@@ -34,14 +34,14 @@ const Carousel: React.FC = () => {
   }, [currentIndex, images])
 
   return (
-    <div className="w-full h-80 overflow-hidden relative">
+    <div className="w-full h-80 overflow-hidden relative carousel-container">
       <div className="flex transition-transform duration-500 ease-in-out">
         {visibleImages.map((image) => (
           <img
             key={image._id}
             src={image.imageUrl}
             alt={image.name}
-            className="w-1/4 h-full object-cover ml-2 mr-2"
+            className="w-1/4 object-cover object-center ml-2 mr-2"
           />
         ))}
       </div>

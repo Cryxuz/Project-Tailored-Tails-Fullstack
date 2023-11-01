@@ -135,8 +135,13 @@ const Items = () => {
         >
           Previous
         </button>
+        <div>
+          <p className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg">
+            {currentPage}
+          </p>
+        </div>
         <button
-          className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg"
+          className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg ml-2"
           onClick={() => paginate(currentPage + 1)}
           disabled={indexOfLastItem >= items.length}
         >

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ItemInterface } from '../interfaces/iteminterface'
 
@@ -34,14 +34,14 @@ const Carousel: React.FC = () => {
   }, [currentIndex, images])
 
   return (
-    <div className="w-full h-80 overflow-hidden relative carousel-container">
+    <div className="w-full h-80 overflow-hidden relative">
       <div className="flex transition-transform duration-500 ease-in-out">
         {visibleImages.map((image) => (
           <img
             key={image._id}
             src={image.imageUrl}
             alt={image.name}
-            className="w-full h-80 object-cover object-center ml-2 mr-2"
+            className="w-full h-80 object-cover object-center ml-2 mr-2 transition-transform duration-500 ease-in-out transform"
           />
         ))}
       </div>

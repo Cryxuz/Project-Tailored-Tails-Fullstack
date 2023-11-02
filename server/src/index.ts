@@ -166,6 +166,12 @@ app.get('/items/category/:category', async (req, res) => {
 
 // Cart
 
+app.get('/cart', async (req,res) => {
+  const items = await itemModel.find()
+  console.log(items)
+  res.json(items)
+})
+
 app.get('/cartitems', async (req, res) => {
   try {
     const cartitems = await cartItem.find()

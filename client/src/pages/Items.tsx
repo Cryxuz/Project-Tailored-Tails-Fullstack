@@ -51,7 +51,7 @@ const Items = () => {
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-16">
         {currentItems.map((item) => (
-          <div key={item._id} className="border rounded-lg p-8 flex flex-col">
+          <div key={item._id} className="border rounded-lg p-8 flex flex-col shadow-xl">
             <h2 className="text-xl font-semibold">{item.name}</h2>
             
             <div className="flex justify-center">

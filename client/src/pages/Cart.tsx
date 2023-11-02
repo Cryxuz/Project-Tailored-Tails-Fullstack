@@ -71,7 +71,7 @@ const Cart = () => {
         <p className="text-center text-2xl font-bold">Suggestions from our best sellers</p>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 p-4 md:p-16">
           {filteredItems.map((item) => (
-          <div className="text-xl font-semibold">
+          <div className="text-xl font-semibold border p-4 m-4 rounded-lg shadow-xl">
             {item.name}
             <img key={item._id} src={item.imageUrl} alt={item.name} />
             <p>

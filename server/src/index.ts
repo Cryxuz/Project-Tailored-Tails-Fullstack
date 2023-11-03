@@ -166,7 +166,7 @@ app.get('/items/category/:category', async (req, res) => {
 
 // Cart
 
-app.get('/cart', async (req,res) => {
+app.get('/cart', async (req, res) => {
   const items = await itemModel.find()
   console.log(items)
   res.json(items)
@@ -206,7 +206,12 @@ app.post('/cartitems', async (req, res) => {
       image_url,
     })
     await newCartItem.save()
-    res.status(201).json(newCartItem)
+    const addedItem = await itemModel.findByIdAndUpdate(
+      item_id,
+      { $push: { cartItems: newCartItem._id } },
+      { new: true }
+    )
+    res.status(201).json({ cartItem: newCartItem, addedItem })
   } catch (error) {
     console.error(error)
     res.status(500).json({ error: 'Internal Server Error' })

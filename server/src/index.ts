@@ -228,6 +228,7 @@ app.delete('/cartitems/:id', async (req, res) => {
 })
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
+  
   console.log(`listening to port ${PORT}`)
   app.listen(PORT)
 })

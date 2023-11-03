@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ItemInterface } from '../interfaces/iteminterface'
-import { AiFillCaretLeft } from 'react-icons/ai'
+import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
 
 const Carousel: React.FC = () => {
   const [images, setImages] = useState<ItemInterface[]>([])
@@ -40,6 +40,10 @@ const Carousel: React.FC = () => {
     )
   }
 
+  const handleNextClick = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % (images.length - 3))
+  }
+
   return (
     <div className="w-full h-80 overflow-hidden relative">
       <div className="flex transition-transform duration-500 ease-in-out">
@@ -59,6 +63,12 @@ const Carousel: React.FC = () => {
         >
           Prev
         </AiFillCaretLeft>
+        <AiFillCaretRight
+          onClick={handleNextClick}
+          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-r"
+        >
+          Next
+        </AiFillCaretRight>
       </div>
     </div>
   )

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ItemInterface } from '../interfaces/iteminterface'
 import { Link } from 'react-router-dom'
+import { FaAudioDescription } from 'react-icons/fa'
 
 const Items = () => {
   const [items, setItems] = useState<ItemInterface[]>([])
@@ -25,6 +26,26 @@ const Items = () => {
   const currentItems = items.slice(indexOfFirstItem, indexOfLastItem)
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
+
+  const handleAddToCart = (itemId: string) => {
+    const selectedItem = items.find((item) => item._id === itemId)
+    if (selectedItem) {
+      axios
+        .post(`http://localhost:3000/cartitems`, {
+          user_id: 'to be added',
+          item_id: itemId,
+          quantity: 1,
+          description: selectedItem.description,
+          price: selectedItem.price,
+        })
+        .then((response) => {
+          console.log('Item added to cart:', response.data)
+        })
+        .catch((error) => {
+          console.error('Error adding item to cart:', error)
+        })
+    }
+  }
 
   return (
     <div>
@@ -51,9 +72,12 @@ const Items = () => {
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-16">
         {currentItems.map((item) => (
-          <div key={item._id} className="border rounded-lg p-8 flex flex-col shadow-xl">
+          <div
+            key={item._id}
+            className="border rounded-lg p-8 flex flex-col shadow-xl"
+          >
             <h2 className="text-xl font-semibold">{item.name}</h2>
-            
+
             <div className="flex justify-center">
               <img
                 src={item.imageUrl}
@@ -62,7 +86,6 @@ const Items = () => {
               />
             </div>
             <div className="mt-2">
-            
               <p>
                 <span className="font-medium text-lg">Category: </span>{' '}
                 {item.category}
@@ -91,7 +114,6 @@ const Items = () => {
                 })()}
               </p>
               <p>
-                
                 <span
                   className={
                     item.stock === 0 ? 'text-red-500' : 'text-green-700'
@@ -102,7 +124,10 @@ const Items = () => {
               </p>
               {item.stock > 0 ? (
                 <div className="flex gap-2 flex-end">
-                  <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
+                  <button
+                    onClick={() => handleAddToCart(item._id)}
+                    className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4"
+                  >
                     Add To Cart
                   </button>
                   <Link to={`/items/${item._id}`}>

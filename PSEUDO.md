@@ -19,6 +19,7 @@
 
 ## Stretch
 
+### add product info for every item - weight, deminsion, material ?
 ### add discounts if user buy 2++ items
 ### display random items in singleItem page below the info/description
 ## #User Comments and ratings?

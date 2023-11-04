@@ -70,7 +70,7 @@ const Items = () => {
           </p>
         </div>
       </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 p-4 md:p-16">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 p-4 md:p-16">
         {currentItems.map((item) => (
           <div
             key={item._id}

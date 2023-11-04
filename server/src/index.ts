@@ -2,8 +2,8 @@ import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
-// import { Item } from '../../client/models/Items'
-// import cartItem from './schemas/cartSchema'
+
+import { UserRouter } from "../routes/user"
 
 dotenv.config()
 
@@ -12,6 +12,11 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+
+
+// userRouter is from routes/user.ts file
+app.use('/user', UserRouter)
+// 
 
 // Items Schema
 const itemSchema = new mongoose.Schema({

@@ -26,6 +26,7 @@ const RegisterPage = () => {
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter Username"
         />
       </div>
       <div>
@@ -34,9 +35,12 @@ const RegisterPage = () => {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          placeholder="Enter Password"
         />
       </div>
-      <button onClick={handleRegister}>Register</button>
+      <button onClick={handleRegister} className="bg-red-400 rounded-md">
+        Register
+      </button>
     </div>
   )
 }

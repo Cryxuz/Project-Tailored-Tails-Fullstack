@@ -19,8 +19,8 @@ const App = () => {
         <Route path="/items" element={<Items />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/items/:itemId" element={<SingleItem />} />
-        <Route path="registration" element={<RegisterPage />} />
-        <Route path="login" element={<LoginPage />} />
+        <Route path="/registration" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
       <main className="container mx-auto p-4">
         <Outlet />

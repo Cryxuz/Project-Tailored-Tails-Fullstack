@@ -1,10 +1,13 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { UserErrors } from '../../../server/routes/errors'
+
+
 const RegisterPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-
+  const navigate = useNavigate()
   const handleRegister = async () => {
     try {
       const response = await axios.post('http://localhost:3000/user/register', {
@@ -13,6 +16,7 @@ const RegisterPage = () => {
       })
       alert('Registration Completed! You may now login.')
       console.log('User registered successfully:', response.data)
+      navigate('/login')
     } catch (err) {
       if (err.response.data.type === UserErrors.USERNAME_ALREADY_EXISTS) {
         alert('ERROR: Username already in use')

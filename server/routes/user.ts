@@ -1,4 +1,4 @@
-import {Router, Request, Response} from 'express'
+import {Router, Request, Response, NextFunction} from 'express'
 import { UserModel} from "../models/user"
 import {UserErrors} from "../routes/errors"
 import bcrypt from 'bcrypt'
@@ -32,10 +32,25 @@ router.post("/register", async (req:Request, res: Response ) => {
   }
 })   
 
+// middleware to verify the token sent from backend to frontend
+export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.headers.authorization
+  if(authHeader) {
+    jwt.verify(authHeader, "secret", (err) => {
+      if (err) {
+        return res.sendStatus(403)
+      }
+
+      next()
+    })
+  }
+  return res.sendStatus(401)
+
+}
 
 // login route
 
-router.post('/login', async (req: Request, res:Response) => {
+router.post('/login', verifyToken, async (req: Request, res:Response) => {
   const {username, password} = req.body
   try {
     

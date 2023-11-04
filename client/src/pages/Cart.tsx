@@ -24,7 +24,7 @@ const Cart = () => {
   }
 
   
-  const filteredItems = items.filter((item, index) => [1, 2, 0, 3].includes(index));
+  const filteredItems = items.filter((item, index) => [25, 2, 22, 0].includes(index));
 
   return (
     <div>

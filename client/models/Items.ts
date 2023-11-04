@@ -12,8 +12,7 @@ const itemSchema = new mongoose.Schema({
   category: {
     type: String,
     enum: [
-      'Outfits for Cats',
-      'Outfits for Dogs',
+      'Costume',
       'Body Piece',
       'Full Body',
       'Hat',

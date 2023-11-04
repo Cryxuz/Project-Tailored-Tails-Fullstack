@@ -78,11 +78,11 @@ const Items = () => {
           >
             <h2 className="text-xl font-semibold">{item.name}</h2>
 
-            <div className="flex justify-center">
+            <div className="flex justify-center w-full items-center">
               <img
                 src={item.imageUrl}
                 alt={item.name}
-                className=" object-contain object-center m-4 rounded-md"
+                className="object-cover h-60 w-60 m-4 rounded-md"
               />
             </div>
             <div className="mt-2">

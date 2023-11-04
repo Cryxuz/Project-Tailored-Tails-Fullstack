@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
-
+import {UserErrors} from '../../../server/routes/errors'
 const RegisterPage = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -11,10 +11,16 @@ const RegisterPage = () => {
         username,
         password,
       })
+      alert("Registration Completed! You may now login.")
       console.log('User registered successfully:', response.data)
-    } catch (error) {
-      console.error('Error registering user:', error)
+    } catch (err) {
+      if (err.response.data.type === UserErrors.USERNAME_ALREADY_EXISTS) { 
+      alert('ERROR: Username already in use')
+      console.error('Error registering user:', err)    
     }
+    else {
+    alert("ERROR: Something went wrong")
+    }}
   }
 
   return (

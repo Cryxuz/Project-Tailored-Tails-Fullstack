@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+body {
+  font-family: 'Roboto', sans-serif
+}
 .cursive {
   font-family: 'Dancing Script', cursive;
 }
@@ -9,3 +11,4 @@
 .merriweather {
   font-family: 'Merriweather', serif;
 }
+

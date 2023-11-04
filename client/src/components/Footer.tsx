@@ -21,7 +21,7 @@ const Footer = () => {
         <div className="text-sm">
           © {new Date().getFullYear()} Tailored Tails. All rights reserved.
         </div>
-        <p className="text-xs">Images from FreekPik & Unsplash</p>
+        <p className="text-xs">Images from FreekPik, Unsplash & Imagine</p>
       </div>
     </footer>
   )

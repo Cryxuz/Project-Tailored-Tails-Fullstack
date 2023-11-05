@@ -2,7 +2,8 @@ import cors from 'cors'
 import express from 'express'
 import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
-
+import itemModel from '../schemas/items'
+import cartItem from '../schemas/cart'
 import { UserRouter } from "../routes/user"
 
 dotenv.config()
@@ -18,97 +19,6 @@ app.use(express.json())
 app.use('/user', UserRouter)
 // 
 
-// Items Schema
-const itemSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  category: {
-    type: String,
-    enum: [
-      'Outfits for Cats',
-      'Outfits for Dogs',
-      'Body Piece',
-      'Full Body',
-      'Hat',
-      'Accessories',
-    ],
-    required: true,
-  },
-  price: {
-    type: Number,
-    required: true,
-  },
-  imageUrl: {
-    type: String,
-    required: true,
-  },
-  rating: {
-    type: Number,
-    default: 0,
-  },
-  stock: {
-    type: Number,
-    required: true,
-  },
-})
-const itemModel = mongoose.model('Item', itemSchema)
-
-// Cart Schema
-
-const cartItemSchema = new mongoose.Schema({
-  user_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
-  item_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    required: true,
-  },
-  price: {
-    // Represents a single item
-    type: Number,
-    required: true,
-  },
-  total_price: {
-    // Total cost of each item in cart
-    type: Number,
-    required: true,
-  },
-  name: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
-  },
-  image_url: {
-    type: String,
-    required: true,
-  },
-  timestamp: {
-    type: Date,
-    default: Date.now,
-  },
-  is_active: {
-    type: Boolean,
-    default: true,
-  },
-})
-
-const cartItem = mongoose.model('CartItem', cartItemSchema)
-
-// GET request
 
 app.get('/items', async (req, res) => {
   const items = await itemModel.find()
@@ -119,10 +29,14 @@ app.get('/items', async (req, res) => {
 //  GET by ID
 
 app.get('/items/:itemId', async (req, res) => {
+  try {
   const itemId = req.params.itemId
   const item = await itemModel.findById(itemId)
   console.log(item)
   res.json(item)
+  } catch (err) {
+    res.status(400).json(err)
+  }
 })
 
 // POST request.

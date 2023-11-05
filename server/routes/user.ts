@@ -1,5 +1,5 @@
 import {Router, Request, Response, NextFunction} from 'express'
-import { UserModel} from "../models/user"
+import { UserModel} from "../schemas/user"
 import {UserErrors} from "../routes/errors"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'

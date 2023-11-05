@@ -36,21 +36,19 @@ router.post("/register", async (req:Request, res: Response ) => {
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization
   if(authHeader) {
-    jwt.verify(authHeader, "secret", (err) => {
+    jwt.verify(authHeader,"secret", (err) => {
       if (err) {
         return res.sendStatus(403)
       }
-
       next()
     })
   }
   return res.sendStatus(401)
-
 }
 
 // login route
 
-router.post('/login', verifyToken, async (req: Request, res:Response) => {
+router.post('/login', async (req: Request, res:Response) => {
   const {username, password} = req.body
   try {
     

@@ -5,8 +5,9 @@ import {useNavigate} from 'react-router-dom'
 import { UserErrors } from '../../../server/routes/errors'
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const [username, setUsername] = useState<string>('')
+  const [password, setPassword] = useState<string>('')
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_, setCookies] = useCookies(["access_token"])
   const navigate = useNavigate()
 
@@ -18,7 +19,6 @@ const LoginPage = () => {
       })
       setCookies("access_token", result.data.token)
       localStorage.setItem("userID", result.data.userId)
-      // in this case navigate hook makes it navigate towards different page after logging in
       navigate('/items')
     }  catch(err) {
       let errorMessage : string = ""

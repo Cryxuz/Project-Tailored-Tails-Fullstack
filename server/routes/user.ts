@@ -9,29 +9,6 @@ dotenv.config()
 
 const router = Router()
 
-// register user
-router.post("/register", async (req:Request, res: Response ) => {
-    const {username, password} = req.body
-  try {
- 
-    const user = await UserModel.findOne({username})
-
-    if (user) {
-      return res.status(400).json({type: UserErrors.USERNAME_ALREADY_EXISTS })
-    }
-    // making password hash to hide it.
-    const hashedPassword = await bcrypt.hash(password, 10)
-    // this will create a new instance in that collection/table
-    const newUser = new UserModel({username, password: hashedPassword,})
-    await newUser.save()
-
-    res.json({message: "User Registered Successfully"})
-  } catch(err) {
-    console.log('Error:', err)
-    res.status(500).json({type: err})
-  }
-})   
-
 // middleware to verify the token sent from backend to frontend
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization
@@ -46,6 +23,30 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
     return res.sendStatus(401)
   }
   }
+
+// register user
+router.post("/register", async (req:Request, res: Response ) => {
+    const {username, password} = req.body
+  try {
+ 
+    const user = await UserModel.findOne({username})
+
+    if (user) {
+      return res.status(400).json({type: UserErrors.USERNAME_ALREADY_EXISTS })
+    }
+    // making password hash to hide it. always 10
+    const hashedPassword = await bcrypt.hash(password, 10)
+    // this will create a new instance in that collection/table
+    const newUser = new UserModel({username, password: hashedPassword})
+    await newUser.save()
+
+    res.json({message: "User Registered Successfully"})
+  } catch(err) {
+    console.log('Error:', err)
+    res.status(500).json({type: err})
+  }
+})   
+
 
 // login route
 

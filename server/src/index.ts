@@ -98,7 +98,7 @@ app.get('/cart', async (req, res) => {
 // from youtube tutorial
 // 
 
-app.post('/cart', verifyToken, async (req, res) => {
+app.post('/cart', async (req, res) => {
   const {customerID, cartItems} = req.body
   try {
     const user = await UserModel.findById(customerID)

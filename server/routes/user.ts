@@ -49,7 +49,7 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
 
 // login route
 
-router.post('/login', async (req: Request, res:Response) => {
+router.post('/login', verifyToken, async (req: Request, res:Response) => {
   const {username, password} = req.body
   try {
     

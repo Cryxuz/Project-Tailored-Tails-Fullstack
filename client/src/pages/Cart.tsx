@@ -1,63 +1,66 @@
-import { useContext, useEffect, useState } from "react";
-import axios from "axios";
-import {  useParams } from "react-router-dom";
-import { ItemInterface } from "../interfaces/iteminterface";
-import { ShopContext } from "../hooks/shop-context";
+import { useContext, useEffect, useState } from 'react'
+import axios from 'axios'
+import { useParams } from 'react-router-dom'
+import { ItemInterface } from '../interfaces/iteminterface'
+import { IShopContext, ShopContext } from '../hooks/shop-context'
 
 const Cart = () => {
-  const { itemId } = useParams();
-  const [items, setItems] = useState<ItemInterface[] | null>(null);
+  const { itemId } = useParams()
+  const [items, setItems] = useState<ItemInterface[] | null>(null)
 
   const shopContext = useContext(ShopContext)
-
+  const { getTotalCartAmount } = useContext<IShopContext>(ShopContext)
+  const totalAmount = getTotalCartAmount()
   useEffect(() => {
     axios
       .get<ItemInterface[]>(`http://localhost:3000/cart`)
       .then((response) => {
-        setItems(response.data);
+        setItems(response.data)
       })
       .catch((error) => {
-        console.error('Error fetching items:', error);
-      });
-  }, [itemId]);
+        console.error('Error fetching items:', error)
+      })
+  }, [itemId])
   if (items === null) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
-  
-  const filteredItems = items.filter((item, index) => [25, 2, 22, 0].includes(index));
+  const filteredItems = items.filter((item, index) =>
+    [25, 2, 22, 0].includes(index)
+  )
 
   return (
     <div>
       <div className="md:grid md:grid-cols-4 gap-[2%] p-10">
         <div className="col-span-3 bg-sky-300">
-        <div className="md:grid md:grid-cols-4 gap-[2%] p-10">
-        <div className="col-span-3 bg-sky-300">
-          {/* Render the items in the cart */}
-          {items.map((item) => {
-            const cartItemCount = shopContext.getCartItemCount(item._id);
+          <div className="md:grid md:grid-cols-4 gap-[2%] p-10">
+            <div className="col-span-3 bg-sky-300">
+              {/* Render the items in the cart */}
+              {items.map((item) => {
+                const cartItemCount = shopContext.getCartItemCount(item._id)
 
-            if (cartItemCount > 0) {
-              return (
-                <div key={item._id}>
-                  {/* Display cart item details here */}
-                  <p>{item.name}</p>
-                  <img src={item.imageUrl} alt={item.name} />
-                  <p>Quantity: {cartItemCount}</p>
-                  <p>Price: {item.price}</p>
-                  {/* add delete/subtract and add quantity btn ?? ask kadin */}
-                </div>
-              );
-            }
+                if (cartItemCount > 0) {
+                  return (
+                    <div key={item._id}>
+                      {/* Display cart item details here */}
+                      <p>{item.name}</p>
+                      <img src={item.imageUrl} alt={item.name} />
+                      <p>Quantity: {cartItemCount}</p>
+                      <p>Price: {item.price}</p>
+                      {/* add delete/subtract and add quantity btn ?? ask kadin */}
+                      <p>Total: {totalAmount}</p>
+                    </div>
+                  )
+                }
 
-            return null;
-          })}
-        </div>
-        <button className="p-2 bg-orange-600 hover-bg-orange-500 rounded-lg text-white md:hidden my-[3%]">
-          Checkout
-        </button>
-        {/* Rest of your cart page content */}
-      </div>
+                return null
+              })}
+            </div>
+            <button className="p-2 bg-orange-600 hover-bg-orange-500 rounded-lg text-white md:hidden my-[3%]">
+              Checkout
+            </button>
+            {/* Rest of your cart page content */}
+          </div>
         </div>
         <button className="p-2 bg-orange-600 hover:bg-orange-500 rounded-lg text-white md:hidden my-[3%]">
           Checkout
@@ -90,70 +93,66 @@ const Cart = () => {
       </div>
 
       {/* Suggestions */}
-      
-        <p className="text-center text-2xl font-bold">Suggestions from our best sellers</p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 p-4 md:p-16">
-          {filteredItems.map((item) => (
+
+      <p className="text-center text-2xl font-bold">
+        Suggestions from our best sellers
+      </p>
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 p-4 md:p-16">
+        {filteredItems.map((item) => (
           <div className="text-xl font-semibold border p-4 m-4 rounded-lg shadow-xl">
             {item.name}
             <img key={item._id} src={item.imageUrl} alt={item.name} />
             <p>
-                <span className="font-medium text-lg">Category: </span>{' '}
-                {item.category}
-              </p>
-              <p>
-                <span className="font-medium text-lg">Price:</span> $
-                {item.price}
-              </p>
-              <p>
-                <span className="font-medium text-lg">Rating:</span>{' '}
-                {(() => {
-                  switch (item.rating) {
-                    case 1:
-                      return '★☆☆☆☆'
-                    case 2:
-                      return '★★☆☆☆'
-                    case 3:
-                      return '★★★☆☆'
-                    case 4:
-                      return '★★★★☆'
-                    case 5:
-                      return '★★★★★'
-                    default:
-                      return 'Not rated'
-                  }
-                })()}
-              </p>
-              <p>
-                
-                <span
-                  className={
-                    item.stock === 0 ? 'text-red-500' : 'text-green-700'
-                  }
-                >
-                  {item.stock === 0 ? 'Out of Stock' : 'In Stock'}
-                </span>
-              </p>
-              {item.stock > 0 ? (
-                <div className="flex gap-2 flex-end">
-                  <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
-                    Add To Cart
-                  </button>
-                  
+              <span className="font-medium text-lg">Category: </span>{' '}
+              {item.category}
+            </p>
+            <p>
+              <span className="font-medium text-lg">Price:</span> ${item.price}
+            </p>
+            <p>
+              <span className="font-medium text-lg">Rating:</span>{' '}
+              {(() => {
+                switch (item.rating) {
+                  case 1:
+                    return '★☆☆☆☆'
+                  case 2:
+                    return '★★☆☆☆'
+                  case 3:
+                    return '★★★☆☆'
+                  case 4:
+                    return '★★★★☆'
+                  case 5:
+                    return '★★★★★'
+                  default:
+                    return 'Not rated'
+                }
+              })()}
+            </p>
+            <p>
+              <span
+                className={item.stock === 0 ? 'text-red-500' : 'text-green-700'}
+              >
+                {item.stock === 0 ? 'Out of Stock' : 'In Stock'}
+              </span>
+            </p>
+            {item.stock > 0 ? (
+              <div className="flex gap-2 flex-end">
+                <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
+                  Add To Cart
+                </button>
+              </div>
+            ) : (
+              <div className="flex  gap-2">
+                <div className="p-2 bg-red-600 rounded-lg text-white mt-4">
+                  Out of Stock
                 </div>
-              ) : (
-                <div className="flex  gap-2">
-                  <div className="p-2 bg-red-600 rounded-lg text-white mt-4">
-                    Out of Stock
-                  </div>       
-                </div>
-              )}
+              </div>
+            )}
           </div>
         ))}
-        </div>
       </div>
-    
-  );
-};
+    </div>
+  )
+}
 
-export default Cart;
+export default Cart

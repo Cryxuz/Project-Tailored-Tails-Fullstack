@@ -39,32 +39,38 @@ export const ShopContextProvider = (props) => {
     }
   }
 
-  const removeFromCart = (itemId: string) => {}
+  // const removeFromCart = (itemId: string) => {}
 
-  const updateCartCount = (newAmount: number, itemId: string) => {
-    if (newAmount < 0) return
+  // const updateCartCount = (newAmount: number, itemId: string) => {
+  //   if (newAmount < 0) return
 
-    setCartItems((prev) => ({ ...prev, [itemId]: newAmount }))
-  }
+  //   setCartItems((prev) => ({ ...prev, [itemId]: newAmount }))
+  // }
 
-  const getTotalCartAmount = () => {
-    let totalAmount = 0
-    for (const item in cartItems) {
-      if (cartItems[item] > 0) {
-        const itemInfo: IProduct = products.find(
-          (product) => product._id === item
-        )
-        totalAmount = cartItems[item] * itemInfro.price
-      }
-    }
-    return totalAmount
-  }
+  // const getTotalCartAmount = () => {
+  //   let totalAmount = 0
+  //   for (const item in cartItems) {
+  //     if (cartItems[item] > 0) {
+  //       const itemInfo = items.find(
+  //         (product) => product._id === item
+  //       )
+  //       totalAmount = cartItems[item] * itemInfo.price
+  //     }
+  //   }
+  //   return totalAmount
+  // }
 
   const contextValue: IShopContext = {
     addToCart,
-    removeFromCart,
-    updateCartCount,
+    // removeFromCart,
+    // updateCartCount,
     getCartItemCount,
+    getTotalCartAmount: function (): number {
+      throw new Error('Function not implemented.')
+    },
+    checkout: function (): void {
+      throw new Error('Function not implemented.')
+    }
   }
 
   return (
@@ -73,3 +79,4 @@ export const ShopContextProvider = (props) => {
     </ShopContext.Provider>
   )
 }
+

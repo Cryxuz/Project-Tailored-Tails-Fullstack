@@ -2,12 +2,12 @@ import { useContext, useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { ItemInterface } from '../interfaces/iteminterface'
-import { IShopContext, ShopContext } from '../hooks/shop-context'
+import { ShopContext } from '../hooks/shop-context'
 import { Link } from 'react-router-dom'
 const Cart = () => {
   const { itemId } = useParams()
   const [items, setItems] = useState<ItemInterface[] | null>(null)
-
+  
   const shopContext = useContext(ShopContext)
   // const { getTotalCartAmount } = useContext<IShopContext>(ShopContext)
   // const totalAmount = getTotalCartAmount()
@@ -24,49 +24,90 @@ const Cart = () => {
   if (items === null) {
     return <div>Loading...</div>
   }
+ 
 
+  
   const filteredItems = items.filter((item, index) =>
     [25, 2, 22, 0].includes(index)
   )
 
   return (
     <div>
-      <div className="md:grid md:grid-cols-4 gap-[2%] p-10">
-        <div className="col-span-3 bg-sky-300">
-          <div className="md:grid md:grid-cols-4 gap-[2%] p-10">
-            <div className="col-span-3 bg-sky-300">
+      <div className="grid md:grid-cols-4 gap-[2%] p-10 ">
+        <div className="col-span-3 bg-gray-50 rounded-lg">
+          <div className="grid-cols-4 gap-[2%] p-10 ">
+            <div className="col-span-3 bg-gray-50">
               {/* Render the items in the cart */}
+              
               {items.map((item) => {
                 const cartItemCount = shopContext.getCartItemCount(item._id)
-
                 if (cartItemCount > 0) {
                   return (
-                    <div key={item._id}>
-                      {/* Display cart item details here */}
-                      <p>{item.name}</p>
-                      <img src={item.imageUrl} alt={item.name} />
-                      <p>Quantity: {cartItemCount}</p>
-                      <p>Price: {item.price}</p>
-                      {/* add delete/subtract and add quantity btn ?? ask kadin */}
-                      {/* <p>Total: {totalAmount.toFixed(2)}</p> */}
-                    </div>
-                  )
+                    <div className='grid grid-cols-4 gap-[5%]' key={item._id}>
+                      <img className='col-span-1 rounded-md mb-[3%]' src={item.imageUrl} alt={item.name} />
+                      <div className='col-span-1'>
+                        <p className='font-bold text-xl'>{item.name}</p>
+                        <p className='my-[3%]'>{item.description}</p>
+                        <p>
+                          <span className="font-medium text-lg">Rating:</span>
+                          {(() => {
+                            switch (item.rating) {
+                              case 1:
+                                return '★☆☆☆☆'
+                              case 2:
+                                return '★★☆☆☆'
+                              case 3:
+                                return '★★★☆☆'
+                              case 4:
+                                return '★★★★☆'
+                              case 5:
+                                return '★★★★★'
+                              default:
+                                return 'Not rated'
+                            }
+                          })()}
+                        </p>
+                      </div>
+                        <p className='col-span-1 justify-self-center font-medium text-lg'>Quantity: <span className='rounded-md border border-gray-300 px-3 py-2'>{cartItemCount}</span></p>
+                        <p className='col-span-1 justify-self-center font-medium text-lg'>Price: <span className='text-orange-600'>${item.price}.00</span></p>
+                        
+                        {/* add delete/subtract and add quantity btn ?? ask kadin */}
+                        {/* <p>Total: {totalAmount.toFixed(2)}</p> */}
+                      
+                    </div>    
+                  )    
                 }
 
-                return null
+                
               })}
+              
             </div>
-            <button className="p-2 bg-orange-600 hover-bg-orange-500 rounded-lg text-white md:hidden my-[3%]">
-              Checkout
-            </button>
-
-            {/* Rest of your cart page content */}
+            <div className='w-[30%] ml-auto'>
+              
+            <p className="text-lg font-bold self-end border-t-2 border-black py-8">
+                Total Price: $
+                {items.reduce((total, item) => {
+                  const cartItemCount = shopContext.getCartItemCount(item._id);
+                  return total + cartItemCount * item.price;
+                }, 0).toFixed(2)}
+                <div className='flex flex-col '>
+                <button className="p-2 bg-orange-600 hover:bg-orange-500 rounded-lg text-white hidden md:block my-[3%]">
+                  Checkout
+                </button>
+                <Link
+                  to="/items"
+                  className="text-center p-2 bg-orange-600 hover:bg-orange-500 rounded-lg text-white hidden md:block my-[3%]"
+                >
+                  Continue Shopping
+                </Link>
+                </div>
+            </p>
+            </div>
+          
           </div>
         </div>
-        <button className="p-2 bg-orange-600 hover:bg-orange-500 rounded-lg text-white md:hidden my-[3%]">
-          Checkout
-        </button>
-        <div>
+
+        <div className='hidden md:block '>
           <h3 className="text-lg font-bold">Delivery Options</h3>
           <p>NZ-wide from $5.95</p>
           <p>Same day delivery for $9.99</p>
@@ -87,18 +128,10 @@ const Cart = () => {
           <p>Afterpay</p>
           <p>Online EFTPOS</p>
           <p>Payment on collection from Fake Adress, Auckland</p>
-          <button className="p-2 bg-orange-600 hover:bg-orange-500 rounded-lg text-white hidden md:block my-[3%]">
-            Checkout
-          </button>
-          <Link
-            to="/items"
-            className="p-2 bg-orange-600 hover:bg-orange-500 rounded-lg text-white hidden md:block my-[3%]"
-          >
-            Continue Shopping
-          </Link>
-        </div>
-      </div>
 
+        </div>
+      
+      </div>
       {/* Suggestions */}
 
       <p className="text-center text-2xl font-bold">
@@ -158,6 +191,7 @@ const Cart = () => {
           </div>
         ))}
       </div>
+    
     </div>
   )
 }

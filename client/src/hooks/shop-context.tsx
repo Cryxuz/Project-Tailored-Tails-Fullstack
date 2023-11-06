@@ -6,6 +6,7 @@ export interface IShopContext {
   updateCartCount: (newAmount: number, itemId: string) => void
   getCartItemCount: (itemId: string) => number
   getTotalCartAmount: () => number
+  checkout: () => void
 }
 
 const defaultValue: IShopContext = {
@@ -14,6 +15,7 @@ const defaultValue: IShopContext = {
   updateCartCount: () => null,
   getCartItemCount: () => 0,
   getTotalCartAmount: () => 0,
+  checkout: () => null,
 }
 
 export const ShopContext = createContext<IShopContext>(defaultValue)

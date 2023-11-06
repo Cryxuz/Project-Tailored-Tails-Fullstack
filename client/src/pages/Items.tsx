@@ -1,19 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import { ItemInterface } from '../interfaces/iteminterface'
 import { Link } from 'react-router-dom'
-import { FaAudioDescription } from 'react-icons/fa'
+import { IShopContext, ShopContext } from '../hooks/shop-context'
+
 
 const Items = () => {
   const [items, setItems] = useState<ItemInterface[]>([])
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
+ 
+  const { addToCart } = useContext<IShopContext>(ShopContext)
+
 
   useEffect(() => {
     axios
       .get<ItemInterface[]>('http://localhost:3000/items')
       .then((response) => {
-        console.log(response.data)
         setItems(response.data)
       })
       .catch((error) => {
@@ -27,25 +30,25 @@ const Items = () => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
-  const handleAddToCart = (itemId: string) => {
-    const selectedItem = items.find((item) => item._id === itemId)
-    if (selectedItem) {
-      axios
-        .post(`http://localhost:3000/cartitems`, {
-          user_id: 'to be added',
-          item_id: itemId,
-          quantity: 1,
-          description: selectedItem.description,
-          price: selectedItem.price,
-        })
-        .then((response) => {
-          console.log('Item added to cart:', response.data)
-        })
-        .catch((error) => {
-          console.error('Error adding item to cart:', error)
-        })
-    }
-  }
+  // const handleAddToCart = (itemId: string) => {
+  //   const selectedItem = items.find((item) => item._id === itemId)
+  //   if (selectedItem) {
+  //     axios
+  //       .post(`http://localhost:3000/cart`, {
+  //         user_id: 'to be added',
+  //         item_id: itemId,
+  //         quantity: 1,
+  //         description: selectedItem.description,
+  //         price: selectedItem.price,
+  //       })
+  //       .then((response) => {
+  //         console.log('Item added to cart:', response.data)
+  //       })
+  //       .catch((error) => {
+  //         console.error('Error adding item to cart:', error)
+  //       })
+  //   }
+  // }
 
   return (
     <div>
@@ -125,11 +128,12 @@ const Items = () => {
               {item.stock > 0 ? (
                 <div className="flex gap-2 flex-end">
                   <button
-                    onClick={() => handleAddToCart(item._id)}
+                    onClick={() => addToCart(item._id)}
                     className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4"
                   >
                     Add To Cart
                   </button>
+                  
                   <Link to={`/items/${item._id}`}>
                     <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
                       View Item

@@ -9,10 +9,12 @@ import Footer from './components/Footer'
 import SingleItem from './pages/SingleItem'
 import RegisterPage from './pages/Register'
 import LoginPage from './pages/Login'
+import { ShopContextProvider } from './hooks/shop-context'
 
 const App = () => {
   return (
     <div>
+      <ShopContextProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -22,6 +24,7 @@ const App = () => {
         <Route path="/registration" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
+      </ShopContextProvider>
       <main className="container mx-auto p-4">
         <Outlet />
       </main>

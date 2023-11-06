@@ -9,8 +9,8 @@ const Cart = () => {
   const [items, setItems] = useState<ItemInterface[] | null>(null)
 
   const shopContext = useContext(ShopContext)
-  const { getTotalCartAmount } = useContext<IShopContext>(ShopContext)
-  const totalAmount = getTotalCartAmount()
+  // const { getTotalCartAmount } = useContext<IShopContext>(ShopContext)
+  // const totalAmount = getTotalCartAmount()
   useEffect(() => {
     axios
       .get<ItemInterface[]>(`http://localhost:3000/cart`)
@@ -48,7 +48,7 @@ const Cart = () => {
                       <p>Quantity: {cartItemCount}</p>
                       <p>Price: {item.price}</p>
                       {/* add delete/subtract and add quantity btn ?? ask kadin */}
-                      <p>Total: {totalAmount}</p>
+                      {/* <p>Total: {totalAmount.toFixed(2)}</p> */}
                     </div>
                   )
                 }

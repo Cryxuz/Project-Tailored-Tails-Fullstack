@@ -25,7 +25,7 @@ app.use('/user', UserRouter)
 
 app.get('/items', async (req, res) => {
   const items = await itemModel.find()
-  console.log(items)
+  
   res.json(items)
 })
 
@@ -35,7 +35,7 @@ app.get('/items/:itemId', async (req, res) => {
   try {
   const itemId = req.params.itemId
   const item = await itemModel.findById(itemId)
-  console.log(item)
+  
   res.json(item)
   } catch (err) {
     res.status(400).json(err)
@@ -90,7 +90,7 @@ app.get('/items/category/:category', async (req, res) => {
 
 app.get('/cart', async (req, res) => {
  const items = await itemModel.find()
-  console.log(items)
+  
   res.json(items)
 })
 
@@ -98,8 +98,8 @@ app.get('/cart', async (req, res) => {
 // from youtube tutorial
 // 
 
-app.post('/cart', verifyToken, async (req, res) => {
-  console.log('reqreqreq.body', req.body)
+app.post('/cart', async (req, res) => {
+  
   const {customerID, cartItems} = req.body
   try {
     const user = await UserModel.findById(customerID)
@@ -142,7 +142,7 @@ app.post('/cart', verifyToken, async (req, res) => {
 app.get('/cartitems', async (req, res) => {
   try {
     const cartitems = await cartItem.find()
-    console.log(cartitems)
+    
     res.json(cartitems)
   } catch (error) {
     console.log(error)

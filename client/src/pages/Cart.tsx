@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { ItemInterface } from '../interfaces/iteminterface'
 import { IShopContext, ShopContext } from '../hooks/shop-context'
-
+import { Link } from 'react-router-dom'
 const Cart = () => {
   const { itemId } = useParams()
   const [items, setItems] = useState<ItemInterface[] | null>(null)
@@ -59,6 +59,7 @@ const Cart = () => {
             <button className="p-2 bg-orange-600 hover-bg-orange-500 rounded-lg text-white md:hidden my-[3%]">
               Checkout
             </button>
+
             {/* Rest of your cart page content */}
           </div>
         </div>
@@ -89,6 +90,12 @@ const Cart = () => {
           <button className="p-2 bg-orange-600 hover:bg-orange-500 rounded-lg text-white hidden md:block my-[3%]">
             Checkout
           </button>
+          <Link
+            to="/items"
+            className="p-2 bg-orange-600 hover:bg-orange-500 rounded-lg text-white hidden md:block my-[3%]"
+          >
+            Continue Shopping
+          </Link>
         </div>
       </div>
 

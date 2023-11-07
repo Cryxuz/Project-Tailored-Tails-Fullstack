@@ -1,5 +1,7 @@
+import axios from 'axios'
 import { createContext, useState } from 'react'
-
+import { useGetToken } from './useGetToken'
+import { useNavigate } from 'react-router-dom'
 export interface IShopContext {
   addToCart: (itemId: string) => void
   removeFromCart: (itemId: string) => void
@@ -22,6 +24,8 @@ export const ShopContext = createContext<IShopContext>(defaultValue)
 
 export const ShopContextProvider = (props) => {
   const [cartItems, setCartItems] = useState<{ string: number } | {}>({})
+  const { headers } = useGetToken()
+  const navigate = useNavigate()
 
   const getCartItemCount = (itemId: string) => {
     if (itemId in cartItems) {
@@ -39,38 +43,43 @@ export const ShopContextProvider = (props) => {
     }
   }
 
-  // const removeFromCart = (itemId: string) => {}
+  const removeFromCart = (itemId: string) => {}
 
-  // const updateCartCount = (newAmount: number, itemId: string) => {
-  //   if (newAmount < 0) return
+  const updateCartCount = (newAmount: number, itemId: string) => {
+    if (newAmount < 0) return
 
-  //   setCartItems((prev) => ({ ...prev, [itemId]: newAmount }))
-  // }
+    setCartItems((prev) => ({ ...prev, [itemId]: newAmount }))
+  }
 
-  // const getTotalCartAmount = () => {
-  //   let totalAmount = 0
-  //   for (const item in cartItems) {
-  //     if (cartItems[item] > 0) {
-  //       const itemInfo = items.find(
-  //         (product) => product._id === item
-  //       )
-  //       totalAmount = cartItems[item] * itemInfo.price
-  //     }
-  //   }
-  //   return totalAmount
-  // }
+  const getTotalCartAmount = () => {
+    let totalAmount = 0
+    for (const item in cartItems) {
+      if (cartItems[item] > 0) {
+        const itemInfo: IProduct = products.find(
+          (product) => product._id === item
+        )
+        totalAmount = cartItems[item] * itemInfro.price
+      }
+    }
+    return totalAmount
+  }
+
+  const checkout = async () => {
+    const body = { customerID: localStorage.getItem('userID'), cartItems }
+    try {
+      await axios.post('http://localhost:3000/cart', body, { headers })
+      navigate('/')
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const contextValue: IShopContext = {
     addToCart,
-    // removeFromCart,
-    // updateCartCount,
+    removeFromCart,
+    updateCartCount,
     getCartItemCount,
-    getTotalCartAmount: function (): number {
-      throw new Error('Function not implemented.')
-    },
-    checkout: function (): void {
-      throw new Error('Function not implemented.')
-    }
+    checkout,
   }
 
   return (
@@ -79,4 +88,3 @@ export const ShopContextProvider = (props) => {
     </ShopContext.Provider>
   )
 }
-

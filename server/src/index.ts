@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import * as dotenv from 'dotenv'
 import itemModel from '../schemas/items'
 import cartItem from '../schemas/cart'
-import { UserRouter, verifyToken } from "../routes/user"
+import { UserRouter, verifyToken } from '../routes/user'
 import { UserModel } from '../schemas/user'
 import { ProductErrors, UserErrors } from '../routes/errors'
 import { verify } from 'jsonwebtoken'
@@ -16,16 +16,18 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-
-
+app.use(express.urlencoded({ extended: true }))
 // userRouter is from routes/user.ts file
 app.use('/user', UserRouter)
-// 
+//
 
+// Stripe
+const striperoutes = require('./routes/stripe-routes')
+app.use('/api/stripe', striperoutes)
 
 app.get('/items', async (req, res) => {
   const items = await itemModel.find()
-  
+  console.log(items)
   res.json(items)
 })
 
@@ -33,10 +35,10 @@ app.get('/items', async (req, res) => {
 
 app.get('/items/:itemId', async (req, res) => {
   try {
-  const itemId = req.params.itemId
-  const item = await itemModel.findById(itemId)
-  
-  res.json(item)
+    const itemId = req.params.itemId
+    const item = await itemModel.findById(itemId)
+    console.log(item)
+    res.json(item)
   } catch (err) {
     res.status(400).json(err)
   }
@@ -89,38 +91,37 @@ app.get('/items/category/:category', async (req, res) => {
 // Cart
 
 app.get('/cart', async (req, res) => {
- const items = await itemModel.find()
-  
+  const items = await itemModel.find()
+  console.log(items)
   res.json(items)
 })
 
-// 
+//
 // from youtube tutorial
-// 
+//
 
-app.post('/cart', async (req, res) => {
-  
-  const {customerID, cartItems} = req.body
+app.post('/cart', verifyToken, async (req, res) => {
+  const { customerID, cartItems } = req.body
   try {
     const user = await UserModel.findById(customerID)
     const productIDs = Object.keys(cartItems)
-    const products = await itemModel.find({_id: {$in: productIDs}})
-    if(!user) {
-      return res.status(400).json({type: UserErrors.NO_USER_FOUND})
+    const products = await itemModel.find({ _id: { $in: productIDs } })
+    if (!user) {
+      return res.status(400).json({ type: UserErrors.NO_USER_FOUND })
     }
     if (products.length !== productIDs.length) {
-      return res.status(400).json({tpye: ProductErrors.NO_PRODUCT_FOUND})
+      return res.status(400).json({ tpye: ProductErrors.NO_PRODUCT_FOUND })
     }
-    let totalPrice = 0;
-    for(const item in cartItems) {
-      const product = products.find ((product) => String(product._id) === item)
+    let totalPrice = 0
+    for (const item in cartItems) {
+      const product = products.find((product) => String(product._id) === item)
 
-      if(!product) {
-        return res.status(400).json({tpye: ProductErrors.NO_PRODUCT_FOUND})
+      if (!product) {
+        return res.status(400).json({ tpye: ProductErrors.NO_PRODUCT_FOUND })
       }
 
       if (product.stock < cartItems[item]) {
-        return res.status(400).json({type: ProductErrors.NOT_ENOUGH_STOCK})
+        return res.status(400).json({ type: ProductErrors.NOT_ENOUGH_STOCK })
       }
       // increasing the total price
       totalPrice += product.price * cartItems[item]
@@ -128,21 +129,23 @@ app.post('/cart', async (req, res) => {
 
       await user.save()
       // updating stocks quantity
-      await itemModel.updateMany({_id: {$in: productIDs}}, {$inc: {stock: -1}})
+      await itemModel.updateMany(
+        { _id: { $in: productIDs } },
+        { $inc: { stock: -1 } }
+      )
     }
 
-    res.json({purchasedItems: user.purchasedItems})
+    res.json({ purchasedItems: user.purchasedItems })
   } catch (err) {
     res.status(400).json(err)
   }
 })
 // end
 
-
 app.get('/cartitems', async (req, res) => {
   try {
     const cartitems = await cartItem.find()
-    
+    console.log(cartitems)
     res.json(cartitems)
   } catch (error) {
     console.log(error)

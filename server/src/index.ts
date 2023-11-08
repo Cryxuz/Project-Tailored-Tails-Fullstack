@@ -16,14 +16,14 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+// app.use(express.urlencoded({ extended: true }))
 // userRouter is from routes/user.ts file
 app.use('/user', UserRouter)
 //
 
 // Stripe
-const striperoutes = require('./routes/stripe-routes')
-app.use('/api/stripe', striperoutes)
+// const striperoutes = require('./routes/stripe-routes')
+// app.use('/api/stripe', striperoutes)
 
 app.get('/items', async (req, res) => {
   const items = await itemModel.find()

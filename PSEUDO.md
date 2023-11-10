@@ -5,7 +5,6 @@
 ### [x] Register user.
 
 ## TO DO:
-### [] connect Redux
 ### [x] pages
 ### [x] css
 ### [x] make every page responsive

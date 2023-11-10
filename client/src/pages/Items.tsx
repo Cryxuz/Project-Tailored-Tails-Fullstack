@@ -5,9 +5,15 @@ import { fetchItems } from '../../redux/actions/itemsActions';
 // import { ItemInterface } from '../interfaces/iteminterface';
 import { Link } from 'react-router-dom';
 import { IShopContext, ShopContext } from '../hooks/shop-context';
+import { useGetAllProductsQuery } from '../features/productsApi'
 
+const Items = ({  fetchItems }) => {
 
-const Items = ({ items, fetchItems }) => {
+  // Hello Kadin, useGetAllProductsQuery is complaining expected 1-2 args
+  // but we didnt specify any args at the productsApi so idk what to do with it.
+  const { data: items, error, isLoading } = useGetAllProductsQuery();
+  console.log('ITEEEEMS',items)
+
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
  
@@ -27,6 +33,13 @@ const Items = ({ items, fetchItems }) => {
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
+  if(isLoading) {
+    return <div>Loading...Please wait</div>
+  }
+  if (error){
+    console.log('ERROR:', error)
+  }
+  
   return (
     <div>
       <div className="md:grid md:grid-cols-2 pt-[15%] md:pt-[5%] mx-10 mb-10">
@@ -150,7 +163,7 @@ const Items = ({ items, fetchItems }) => {
         <button
           className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg ml-2"
           onClick={() => paginate(currentPage + 1)}
-          disabled={items && indexOfLastItem >= items.length}
+          disabled={!items || indexOfLastItem >= items.length}
         >
           Next
         </button>

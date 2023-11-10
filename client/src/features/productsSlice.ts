@@ -29,7 +29,7 @@ export const productsFetch = createAsyncThunk<Item[], void>(
 );
 
 const productsSlice = createSlice({
-  name: 'products', // Keep the name as 'products' or choose another appropriate name
+  name: 'items', // Keep the name as 'products' or choose another appropriate name
   initialState,
   reducers: {},
   extraReducers: (builder) => {

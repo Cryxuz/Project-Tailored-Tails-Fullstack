@@ -1,54 +1,31 @@
-import { useState, useEffect, useContext } from 'react'
-import axios from 'axios'
-import { ItemInterface } from '../interfaces/iteminterface'
-import { Link } from 'react-router-dom'
-import { IShopContext, ShopContext } from '../hooks/shop-context'
+import { useState, useEffect, useContext } from 'react';
+// import axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchItems } from '../../redux/actions/itemsActions';
+// import { ItemInterface } from '../interfaces/iteminterface';
+import { Link } from 'react-router-dom';
+import { IShopContext, ShopContext } from '../hooks/shop-context';
 
 
-const Items = () => {
-  const [items, setItems] = useState<ItemInterface[]>([])
+const Items = ({ items, fetchItems }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
  
   const { addToCart } = useContext<IShopContext>(ShopContext)
 
 
-  useEffect(() => {
-    axios
-      .get<ItemInterface[]>('http://localhost:3000/items')
-      .then((response) => {
-        setItems(response.data)
-      })
-      .catch((error) => {
-        console.error('Error fetching items:', error)
-      })
-  }, [])
 
-  const indexOfLastItem = currentPage * itemsPerPage
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = items.slice(indexOfFirstItem, indexOfLastItem)
+
+  useEffect(() => {
+    fetchItems();
+  }, [fetchItems]);
+
+  const indexOfFirstItem = (currentPage - 1) * itemsPerPage;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const currentItems = (items ? items.slice(indexOfFirstItem, indexOfLastItem) : []) || [];
+  
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
-
-  // const handleAddToCart = (itemId: string) => {
-  //   const selectedItem = items.find((item) => item._id === itemId)
-  //   if (selectedItem) {
-  //     axios
-  //       .post(`http://localhost:3000/cart`, {
-  //         user_id: 'to be added',
-  //         item_id: itemId,
-  //         quantity: 1,
-  //         description: selectedItem.description,
-  //         price: selectedItem.price,
-  //       })
-  //       .then((response) => {
-  //         console.log('Item added to cart:', response.data)
-  //       })
-  //       .catch((error) => {
-  //         console.error('Error adding item to cart:', error)
-  //       })
-  //   }
-  // }
 
   return (
     <div>
@@ -173,7 +150,7 @@ const Items = () => {
         <button
           className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg ml-2"
           onClick={() => paginate(currentPage + 1)}
-          disabled={indexOfLastItem >= items.length}
+          disabled={items && indexOfLastItem >= items.length}
         >
           Next
         </button>
@@ -181,5 +158,16 @@ const Items = () => {
     </div>
   )
 }
+const mapStateToProps = (state) => {
+  return {
+    items: state.items, // Assuming your items are stored in the "items" slice of the Redux state
+  };
+};
 
-export default Items
+// Map the dispatch functions to component props
+const mapDispatchToProps = {
+  fetchItems,
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export default connect(mapStateToProps, mapDispatchToProps)(Items);

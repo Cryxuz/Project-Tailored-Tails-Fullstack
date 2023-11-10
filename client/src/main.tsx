@@ -1,26 +1,31 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
-import { BrowserRouter } from 'react-router-dom'
-import { configureStore } from '@reduxjs/toolkit'
-import { Provider } from 'react-redux'
-import productsReducer, { productsFetch } from './features/productsSlice.js'
-import { productsApi } from './features/prodoctsApi.ts'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App.tsx';
+import './index.css';
+import { BrowserRouter } from 'react-router-dom';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import productsReducer, { productsFetch } from './features/productsSlice.js';
+import { itemsApi } from './features/productsApi.ts';
+import Items from './pages/Items.tsx';
 
 const store = configureStore({
   reducer: {
     products: productsReducer,
-    [productsApi.reducerPath]: productsApi.reducer,
+    [itemsApi.reducerPath]: itemsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(productsApi.middleware),
-})
+    getDefaultMiddleware().concat(itemsApi.middleware),
+});
 
-store.dispatch(productsFetch())
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-)
+// Dispatch the productsFetch action and wait for it to complete
+store.dispatch(productsFetch()).then(() => {
+  ReactDOM.createRoot(document.getElementById('root')!).render(
+    <Provider store={store}>
+      <BrowserRouter>
+      
+        <App />
+      </BrowserRouter>
+    </Provider>
+  );
+});

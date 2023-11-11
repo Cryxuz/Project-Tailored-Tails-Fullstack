@@ -1,45 +1,41 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react'
 // import axios from 'axios';
-import { connect } from 'react-redux';
-import { fetchItems } from '../../redux/actions/itemsActions';
+import { connect } from 'react-redux'
+import { fetchItems } from '../../redux/actions/itemsActions'
 // import { ItemInterface } from '../interfaces/iteminterface';
-import { Link } from 'react-router-dom';
-import { IShopContext, ShopContext } from '../hooks/shop-context';
+import { Link } from 'react-router-dom'
+import { IShopContext, ShopContext } from '../hooks/shop-context'
 import { useGetAllProductsQuery } from '../features/productsApi'
 
-const Items = ({  fetchItems }) => {
-
+const Items = ({ fetchItems }) => {
   // Hello Kadin, useGetAllProductsQuery is complaining expected 1-2 args
   // but we didnt specify any args at the productsApi so idk what to do with it.
-  const { data: items, error, isLoading } = useGetAllProductsQuery();
-  console.log('ITEEEEMS',items)
+  const { data: items, error, isLoading } = useGetAllProductsQuery()
+  console.log('ITEEEEMS', items)
 
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
- 
+
   const { addToCart } = useContext<IShopContext>(ShopContext)
 
-
-
-
   useEffect(() => {
-    fetchItems();
-  }, [fetchItems]);
+    fetchItems()
+  }, [fetchItems])
 
-  const indexOfFirstItem = (currentPage - 1) * itemsPerPage;
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const currentItems = (items ? items.slice(indexOfFirstItem, indexOfLastItem) : []) || [];
-  
+  const indexOfFirstItem = (currentPage - 1) * itemsPerPage
+  const indexOfLastItem = currentPage * itemsPerPage
+  const currentItems =
+    (items ? items.slice(indexOfFirstItem, indexOfLastItem) : []) || []
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber)
 
-  if(isLoading) {
+  if (isLoading) {
     return <div>Loading...Please wait</div>
   }
-  if (error){
+  if (error) {
     console.log('ERROR:', error)
   }
-  
+
   return (
     <div>
       <div className="md:grid md:grid-cols-2 pt-[15%] md:pt-[5%] mx-10 mb-10">
@@ -123,7 +119,7 @@ const Items = ({  fetchItems }) => {
                   >
                     Add To Cart
                   </button>
-                  
+
                   <Link to={`/items/${item._id}`}>
                     <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
                       View Item
@@ -174,13 +170,13 @@ const Items = ({  fetchItems }) => {
 const mapStateToProps = (state) => {
   return {
     items: state.items, // Assuming your items are stored in the "items" slice of the Redux state
-  };
-};
+  }
+}
 
 // Map the dispatch functions to component props
 const mapDispatchToProps = {
   fetchItems,
-};
+}
 
 // eslint-disable-next-line react-refresh/only-export-components
-export default connect(mapStateToProps, mapDispatchToProps)(Items);
+export default connect(mapStateToProps, mapDispatchToProps)(Items)

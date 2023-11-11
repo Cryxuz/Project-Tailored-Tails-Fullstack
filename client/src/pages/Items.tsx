@@ -6,17 +6,21 @@ import { fetchItems } from '../../redux/actions/itemsActions'
 import { Link } from 'react-router-dom'
 import { IShopContext, ShopContext } from '../hooks/shop-context'
 import { useGetAllProductsQuery } from '../features/productsApi'
+import { useDispatch } from 'react-redux'
+import { addToCart } from '../features/cartSlice'
 
 const Items = ({ fetchItems }) => {
-  // Hello Kadin, useGetAllProductsQuery is complaining expected 1-2 args
-  // but we didnt specify any args at the productsApi so idk what to do with it.
   const { data: items, error, isLoading } = useGetAllProductsQuery()
   console.log('ITEEEEMS', items)
-
+  const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
 
   const { addToCart } = useContext<IShopContext>(ShopContext)
+
+  // const handleAddToCart = (item) => {
+  //   dispatch(addToCart(item))
+  // }
 
   useEffect(() => {
     fetchItems()
@@ -114,7 +118,7 @@ const Items = ({ fetchItems }) => {
               {item.stock > 0 ? (
                 <div className="flex gap-2 flex-end">
                   <button
-                    onClick={() => addToCart(item._id)}
+                    onClick={() => addToCart(item.id)}
                     className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4"
                   >
                     Add To Cart

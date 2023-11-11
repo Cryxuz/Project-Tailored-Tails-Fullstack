@@ -18,9 +18,9 @@ const Items = ({ fetchItems }) => {
 
   const { addToCart } = useContext<IShopContext>(ShopContext)
 
-  // const handleAddToCart = (item) => {
-  //   dispatch(addToCart(item))
-  // }
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item))
+  }
 
   useEffect(() => {
     fetchItems()
@@ -118,7 +118,7 @@ const Items = ({ fetchItems }) => {
               {item.stock > 0 ? (
                 <div className="flex gap-2 flex-end">
                   <button
-                    onClick={() => addToCart(item.id)}
+                    onClick={() => handleAddToCart(item)}
                     className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4"
                   >
                     Add To Cart

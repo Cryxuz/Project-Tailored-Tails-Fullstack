@@ -42,6 +42,7 @@ const cartSlice = createSlice({
         position: "bottom-left"
       })
       }
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
     },
   },
 })

@@ -11,10 +11,14 @@ import RegisterPage from './pages/Register'
 import LoginPage from './pages/Login'
 import { ShopContextProvider } from './hooks/shop-context'
 import NotFound from './components/NotFound'
+import {ToastContainer} from "react-toastify"
+import "./App.css"
+import "react-toastify/dist/ReactToastify.css"
 
 const App = () => {
   return (
     <div>
+      <ToastContainer />
       <ShopContextProvider>
         <Navbar />
         <Routes>

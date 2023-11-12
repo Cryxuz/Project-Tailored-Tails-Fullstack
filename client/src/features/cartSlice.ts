@@ -17,29 +17,24 @@ const initialState: Cart = {
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
 }
-
+      
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addToCart(state, action) {
-      const existingItem = state.cartItems.find(
-        (item) => item.id === action.payload.id
-      )
 
-      if (existingItem) {
-        existingItem.cartQuantity += 1
+    
+      // if we have product in the cart we increase its quantity
+    
+      const itemIndex =  state.cartItems.findIndex( (item) => item.name === action.payload.name)
+      if(itemIndex >= 0) {
+        state.cartItems[itemIndex].cartQuantity += 1;
       } else {
-        state.cartItems.push({ ...action.payload, cartQuantity: 1 })
+        // if we dont have product in the cart we run this code
+      const tempProduct = {...action.payload, cartQuantity: 1};
+      state.cartItems.push(tempProduct)
       }
-      state.cartTotalQuantity = state.cartItems.reduce(
-        (total, item) => total + item.cartQuantity,
-        0
-      )
-      state.cartTotalAmount = state.cartItems.reduce(
-        (total, item) => total + item.price * item.cartQuantity,
-        0
-      )
     },
   },
 })

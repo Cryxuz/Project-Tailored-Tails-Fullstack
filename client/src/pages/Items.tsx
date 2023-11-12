@@ -19,7 +19,6 @@ const Items = ({ fetchItems }) => {
 
   const handleAddToCart = (item: unknown) => {
     dispatch(addToCart(item))
-    console.log(item)
   }
 
   useEffect(() => {

@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv'
 import itemModel from '../schemas/items'
 import cartItem from '../schemas/cart'
 import { UserRouter, verifyToken } from '../routes/user'
-import { UserModel } from '../schemas/user'
+import { User } from '../schemas/user'
 import { ProductErrors, UserErrors } from '../routes/errors'
 import { verify } from 'jsonwebtoken'
 
@@ -103,7 +103,7 @@ app.get('/cart', async (req, res) => {
 app.post('/cart', verifyToken, async (req, res) => {
   const { customerID, cartItems } = req.body
   try {
-    const user = await UserModel.findById(customerID)
+    const user = await User.findById(customerID)
     const productIDs = Object.keys(cartItems)
     const products = await itemModel.find({ _id: { $in: productIDs } })
     if (!user) {

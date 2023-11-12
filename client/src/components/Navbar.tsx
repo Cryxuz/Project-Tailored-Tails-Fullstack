@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 const Navbar = () => {
   const [open, setOpen] = useState(false)
-
+  const { cartTotalQuantity } = useSelector((state) => state.cart)
   const handleMenu = () => {
     setOpen((prev) => !prev)
   }
@@ -40,14 +41,16 @@ const Navbar = () => {
               to="/cart"
               className="text-black font-semibold hover:underline merriweather text-xl"
             >
-              Cart
+              Cart {cartTotalQuantity}
             </Link>
+
             <Link
               to="/registration"
               className="text-black font-semibold hover:underline merriweather text-xl"
             >
               Registration
             </Link>
+
             <Link
               to="/login"
               className="text-black font-semibold hover:underline merriweather text-xl"

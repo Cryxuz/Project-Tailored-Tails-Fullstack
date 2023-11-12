@@ -4,6 +4,7 @@ import {
   decreaseCartQuantity,
   removeFromCart,
   addToCart,
+  clearCart,
 } from '../features/cartSlice'
 
 const Cart = () => {
@@ -20,6 +21,10 @@ const Cart = () => {
 
   const handleIncreaseCartQuantity = (cartItem) => {
     dispatch(addToCart(cartItem))
+  }
+
+  const handleClearCart = () => {
+    dispatch(clearCart())
   }
   return (
     <div className="py-[2rem] px-[4rem] my-[rem]">
@@ -125,7 +130,10 @@ const Cart = () => {
             ))}
           </div>
           <div className="flex justify-between items-start border-t-[1px] border-slate-300 pt-[3%] ">
-            <button className="bg-red-600 hover:bg-red-500 text-white font-bold py-1 px-4 rounded-lg ml-[2%]">
+            <button
+              className="bg-red-600 hover:bg-red-500 text-white font-bold py-1 px-4 rounded-lg ml-[2%]"
+              onClick={() => handleClearCart()}
+            >
               Clear Cart
             </button>
             <div className="cart-checkout">

@@ -5,7 +5,9 @@ import {
   removeFromCart,
   addToCart,
   clearCart,
+  getTotals,
 } from '../features/cartSlice'
+import { useEffect } from 'react'
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart)
@@ -26,6 +28,10 @@ const Cart = () => {
   const handleClearCart = () => {
     dispatch(clearCart())
   }
+
+  useEffect(() => {
+    dispatch(getTotals())
+  }, [cart])
   return (
     <div className="py-[2rem] px-[4rem] my-[rem]">
       <h2 className="text-4xl text-center">Shopping Cart</h2>

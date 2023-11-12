@@ -1,6 +1,10 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { removeFromCart } from '../features/cartSlice'
+import {
+  decreaseCartQuantity,
+  removeFromCart,
+  addToCart,
+} from '../features/cartSlice'
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart)
@@ -8,6 +12,14 @@ const Cart = () => {
 
   const handleRemoveFromCart = (cartItem) => {
     dispatch(removeFromCart(cartItem))
+  }
+
+  const handleDecreaseCartQuantity = (cartItem) => {
+    dispatch(decreaseCartQuantity(cartItem))
+  }
+
+  const handleIncreaseCartQuantity = (cartItem) => {
+    dispatch(addToCart(cartItem))
   }
   return (
     <div className="py-[2rem] px-[4rem] my-[rem]">
@@ -90,13 +102,19 @@ const Cart = () => {
                 </div>
                 <div>${cartItem.price}</div>
                 <div className="flex w-[130px] max-w-[100%] items-start justify-center border-[1px] rounded-md">
-                  <button className="border-0 outline-none bg-inherit py-[0.7rem] px-[1.5rem] ">
+                  <button
+                    className="border-0 outline-none bg-inherit py-[0.7rem] px-[1.5rem] "
+                    onClick={() => handleDecreaseCartQuantity(cartItem)}
+                  >
                     -
                   </button>
                   <div className="count py-[0.7rem]">
                     {cartItem.cartQuantity}
                   </div>
-                  <button className="border-0 outline-none bg-inherit py-[0.7rem] px-[1.5rem] ">
+                  <button
+                    className="border-0 outline-none bg-inherit py-[0.7rem] px-[1.5rem] "
+                    onClick={() => handleIncreaseCartQuantity(cartItem)}
+                  >
                     +
                   </button>
                 </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 // import axios from 'axios';
 import { connect } from 'react-redux'
 import { fetchItems } from '../../redux/actions/itemsActions'
@@ -172,7 +172,7 @@ const Items = ({ fetchItems }) => {
 }
 const mapStateToProps = (state) => {
   return {
-    items: state.items, // Assuming your items are stored in the "items" slice of the Redux state
+    items: state.items, // Assuming the items are stored in the "items" slice of the Redux state
   }
 }
 

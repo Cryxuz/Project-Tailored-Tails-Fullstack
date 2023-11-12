@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose'
-import { User } from '../models/user'
+import { UserModel } from '../models/user'
 
-const UserSchema = new Schema<User>({
+const UserSchema = new Schema<UserModel>({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   // purchasedItems:
@@ -17,4 +17,4 @@ const UserSchema = new Schema<User>({
 })
 
 // "user" is the name of the table
-export const UserModel = model<User>('user', UserSchema)
+export const User = model<UserModel>('user', UserSchema)

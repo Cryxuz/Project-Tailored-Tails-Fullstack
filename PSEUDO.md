@@ -5,6 +5,8 @@
 ### [x] Register user.
 
 ## TO DO:
+
+### [] category
 ### [] connect to redux
 ### [x] pages
 ### [x] css

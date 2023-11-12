@@ -4,22 +4,22 @@ import { connect } from 'react-redux'
 import { fetchItems } from '../../redux/actions/itemsActions'
 // import { ItemInterface } from '../interfaces/iteminterface';
 import { Link } from 'react-router-dom'
-import { IShopContext, ShopContext } from '../hooks/shop-context'
+// import { IShopContext, ShopContext } from '../hooks/shop-context'
 import { useGetAllProductsQuery } from '../features/productsApi'
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../features/cartSlice'
 
 const Items = ({ fetchItems }) => {
   const { data: items, error, isLoading } = useGetAllProductsQuery()
-  console.log('ITEEEEMS', items)
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
+  
+  // const { addToCart: contextAddToCart } = useContext<IShopContext>(ShopContext)
 
-  const { addToCart } = useContext<IShopContext>(ShopContext)
-
-  const handleAddToCart = (item) => {
+  const handleAddToCart = (item: unknown) => {
     dispatch(addToCart(item))
+    console.log(item)
   }
 
   useEffect(() => {

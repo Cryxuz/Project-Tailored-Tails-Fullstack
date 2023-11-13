@@ -23,74 +23,95 @@ const Navbar = () => {
             Tailored Tails
           </div>
           {/* <div className="space-x-10 hidden md:block"> */}
-           
-            {
-              auth.name ? 
-              <div>
-                 <Link
-              to="/"
-              className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
-            >
-              Home
-            </Link>
-            <Link
-              to="/items"
-              className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
-            >
-              Items
-            </Link>
-            <Link
-              to="/category"
-              className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
-            >
-              Category
-            </Link>
-            <Link
-              to="/cart"
-              className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
-            >
-              Cart<span className='bg-slate-600 rounded-full p-2 m-2'>({cartTotalQuantity})</span> 
-            </Link>
-              <Link to="/" onClick={() => {
-                dispatch(logoutUser(null))
-                toast.warning("You have logged out", {position: "bottom-left"})
-              }} className="px-[5%] text-black font-semibold hover:underline merriweather text-xl">
-                Logout
-              </Link>  
-              </div>
-              :  
-              <div>
-                 <Link
-              to="/"
-              className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
-            >
-              Home
-            </Link>
-            <Link
-              to="/items"
-              className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
-            >
-              Items
-            </Link>
-            <Link
-              to="/category"
-              className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
-            >
-              Category
-            </Link>
-            <Link
-              to="/cart"
-              className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
-            >
-              Cart<span className='bg-slate-600 rounded-full p-2 m-2'>({cartTotalQuantity})</span> 
-            </Link>
-                <Link className="px-[5%] text-black font-semibold hover:underline merriweather text-xl" to="/login">Login</Link>
-                <Link className="px-[5%] text-black font-semibold hover:underline merriweather text-xl" to="/registration">Register</Link>
-              </div>
-            }
 
-            {/* OLD LINKS */}
-            {/* <Link
+          {auth.name ? (
+            <div>
+              <Link
+                to="/"
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+              >
+                Home
+              </Link>
+              <Link
+                to="/items"
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+              >
+                Items
+              </Link>
+              <Link
+                to="/category"
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+              >
+                Category
+              </Link>
+              <Link
+                to="/cart"
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+              >
+                Cart
+                <span className="bg-slate-600 rounded-full p-2 m-2">
+                  ({cartTotalQuantity})
+                </span>
+              </Link>
+              <Link
+                to="/"
+                onClick={() => {
+                  dispatch(logoutUser(null))
+                  toast.warning('You have logged out', {
+                    position: 'bottom-left',
+                  })
+                }}
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+              >
+                Logout
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <Link
+                to="/"
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+              >
+                Home
+              </Link>
+              <Link
+                to="/items"
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+              >
+                Items
+              </Link>
+              <Link
+                to="/category"
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+              >
+                Category
+              </Link>
+              <Link
+                to="/cart"
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+              >
+                Cart
+                <span className="bg-slate-600 rounded-full p-2 m-2">
+                  ({cartTotalQuantity})
+                </span>
+              </Link>
+              <Link
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+                to="/login"
+              >
+                Login
+              </Link>
+              <Link
+                className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
+                to="/registration"
+              >
+                Register
+              </Link>
+            </div>
+          )}
+
+          {/* OLD LINKS */}
+          {/* <Link
               to="/registration"
               className="text-black font-semibold hover:underline merriweather text-xl"
             >

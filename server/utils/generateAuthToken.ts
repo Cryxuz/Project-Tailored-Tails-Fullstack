@@ -1,8 +1,8 @@
 import { sign } from 'jsonwebtoken'
-
+import { UserModel } from '../models/user'
 var jwt = require('jsonwebtoken')
 
-const generateAuthToken = (user) => {
+const generateAuthToken = (user: UserModel) => {
   try {
     const tokenKey = process.env.JWT_KEY
 
@@ -20,7 +20,7 @@ const generateAuthToken = (user) => {
     )
     return token
   } catch (error) {
-    console.error('Error generating auth token:', error.message)
+    console.error('Error generating auth token:', error)
     throw error
   }
 }

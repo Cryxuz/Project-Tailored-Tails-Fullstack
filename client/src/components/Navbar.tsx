@@ -1,11 +1,15 @@
 import { Link } from 'react-router-dom'
 import { FaBars, FaTimes } from 'react-icons/fa'
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { logoutUser } from '../features/authSlice'
+import { toast } from 'react-toastify'
 
 const Navbar = () => {
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const { cartTotalQuantity } = useSelector((state) => state.cart)
+  const auth = useSelector((state) => state.auth)
   const handleMenu = () => {
     setOpen((prev) => !prev)
   }
@@ -43,8 +47,19 @@ const Navbar = () => {
             >
               Cart {cartTotalQuantity}
             </Link>
-
-            <Link
+            {
+              auth.name ? 
+              <button onClick={() => {
+                dispatch(logoutUser(null))
+                toast.warning("You have logged out", {position: "bottom-left"})
+              }}>
+                Logout
+              </button>  :  <div>
+                <Link className="text-black font-semibold hover:underline merriweather text-xl" to="/login">Login</Link>
+                <Link className="text-black font-semibold hover:underline merriweather text-xl" to="/registration">Register</Link>
+              </div>
+            }
+            {/* <Link
               to="/registration"
               className="text-black font-semibold hover:underline merriweather text-xl"
             >
@@ -56,7 +71,7 @@ const Navbar = () => {
               className="text-black font-semibold hover:underline merriweather text-xl"
             >
               Login
-            </Link>
+            </Link> */}
           </div>
           {/* Hamburger menu */}
           <div className="-mr-2 flex border-2 border-black rounded-lg md:hidden">

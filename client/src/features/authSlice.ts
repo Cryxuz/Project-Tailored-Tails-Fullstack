@@ -3,7 +3,7 @@ import axios from 'axios'
 import {jwtDecode} from 'jwt-decode'
 
 interface initialStateModel  {
-  token: string,
+token: string,
 name: string,
 email: string,
 _id: string,
@@ -22,7 +22,7 @@ const initialState: initialStateModel = {
   email:"",
   _id: "",
   registerStatus: "",
-  registerError: null,
+  registerError: "",
   loginStatus: "",
   loginError: "",
   userLoaded: false,
@@ -50,7 +50,36 @@ const authSlice = createSlice ({
   name: "auth",
   initialState,
   reducers:{
+      loadUser(state, action) {
+        const token = state.token
 
+        if(token) {
+          const user = jwtDecode(token)
+          return {
+            ...state,
+            token,
+            name: user.name,
+            email: user.email,
+            _id: user._id,
+            userLoaded: true,
+          }
+        }
+      },
+      logoutUser(state,action) {
+        localStorage.removeItem("token")
+        return {
+          ...state,
+          token: "",
+          name: "",
+          email:"",
+          _id: "",
+          registerStatus: "",
+          registerError:"",
+          loginStatus: "",
+          loginError: "",
+          userLoaded: false,
+        }
+      }
   },
   extraReducers: (builder) => {
     builder.addCase(registerUser.pending, (state, action) =>{
@@ -80,5 +109,5 @@ const authSlice = createSlice ({
     } )
   }
 })
-
+export const {loadUser, logoutUser } = authSlice.actions
 export default authSlice.reducer

@@ -59,6 +59,8 @@ const Navbar = () => {
                 <Link className="text-black font-semibold hover:underline merriweather text-xl" to="/registration">Register</Link>
               </div>
             }
+
+            {/* OLD LINKS */}
             {/* <Link
               to="/registration"
               className="text-black font-semibold hover:underline merriweather text-xl"

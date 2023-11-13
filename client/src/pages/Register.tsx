@@ -26,13 +26,9 @@ const Register = () => {
     password: ""
   })
 
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(registerUser(user))
-    
   }
   return (
 

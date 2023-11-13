@@ -8,13 +8,14 @@ import { Outlet } from 'react-router-dom'
 import Footer from './components/Footer'
 import SingleItem from './pages/SingleItem'
 // import RegisterPage from './pages/OldRegister'
-import LoginPage from './pages/Login'
+import LoginPage from './pages/OldLogin'
 import { ShopContextProvider } from './hooks/shop-context'
 import NotFound from './components/NotFound'
 import {ToastContainer} from "react-toastify"
 import "./App.css"
 import "react-toastify/dist/ReactToastify.css"
 import Register from './pages/Register'
+// import Login from './pages/Login'
 
 const App = () => {
   return (

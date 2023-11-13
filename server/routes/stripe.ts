@@ -1,11 +1,11 @@
 import express from 'express'
 import Stripe from 'stripe'
 import * as dotenv from 'dotenv'
-
+// const Stripe = require('stripe')
 dotenv.config()
 
 const stripeKey = process.env.STRIPE_KEY
-
+// const stripe = Stripe(process.env.STRIPE_KEY)
 if (!stripeKey) {
   throw new Error('Stripe key not provided')
 }
@@ -18,12 +18,18 @@ router.post('/create-checkout-session', async (req, res) => {
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
-        price: '{{PRICE_ID}}',
+        price_data: {
+          currency: 'usd',
+          product_data: {
+            name: 'Coat',
+          },
+          unit_amount: 1000,
+        },
         quantity: 1,
       },
     ],
     mode: 'payment',
-    success_url: `${YOUR_DOMAIN}/`,
+    success_url: `${YOUR_DOMAIN}/success`,
     cancel_url: `${YOUR_DOMAIN}/cart`,
   })
 

@@ -8,6 +8,7 @@ import {
   getTotals,
 } from '../features/cartSlice'
 import { useEffect } from 'react'
+import CheckoutButton from '../components/CheckoutButton'
 
 const Cart = () => {
   const auth = useSelector((state) => state.auth)
@@ -154,12 +155,17 @@ const Cart = () => {
                 Taxes and shipping calculated at checkout
               </p>
               <div className="flex flex-col">
-                {auth.name ? <button className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg">
-                  Check out
-                </button>: <button onClick={() => navigate('/login')} className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-lg">
-                  Log in
-                </button>}
-                
+                {auth.name ? (
+                  <CheckoutButton cartItems={cart.cartItems} />
+                ) : (
+                  <button
+                    onClick={() => navigate('/login')}
+                    className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-lg"
+                  >
+                    Log in
+                  </button>
+                )}
+
                 <div className="continue-shopping">
                   <Link to="/items">
                     <button className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg mt-[5%] w-[100%]">

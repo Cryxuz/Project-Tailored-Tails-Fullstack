@@ -10,7 +10,6 @@ import cartReducer, { getTotals } from './features/cartSlice.ts'
 import productsReducer, { productsFetch } from './features/productsSlice.js'
 import authReducer, { loadUser } from './features/authSlice.ts'
 
-
 const store = configureStore({
   reducer: {
     products: productsReducer,
@@ -25,7 +24,6 @@ const store = configureStore({
 store.dispatch(productsFetch())
 store.dispatch(getTotals())
 store.dispatch(loadUser(null))
-
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>

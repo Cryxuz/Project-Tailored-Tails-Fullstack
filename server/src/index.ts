@@ -11,19 +11,19 @@ dotenv.config()
 
 const PORT = process.env.PORT || 3000
 const app = express()
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  })
+)
 
-app.use(cors())
 app.use(express.json())
-// app.use(express.urlencoded({ extended: true }))
-// userRouter is from routes/user.ts file
-// app.use('/user', UserRouter)
-//
+
 app.use('/register', RegisterRouter)
 app.use('/login', LoginRouter)
-app.use('stripe', StripeRouter)
-// Stripe
-// const striperoutes = require('./routes/stripe-routes')
-// app.use('/api/stripe', striperoutes)
+app.use('/stripe', StripeRouter)
 
 app.get('/items', async (req, res) => {
   const items = await itemModel.find()

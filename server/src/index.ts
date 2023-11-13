@@ -8,6 +8,8 @@ import { UserRouter, verifyToken } from '../routes/user'
 import { User } from '../schemas/user'
 import { ProductErrors, UserErrors } from '../routes/errors'
 import { verify } from 'jsonwebtoken'
+import { RegisterRouter } from '../routes/register'
+import {LoginRouter} from '../routes/login'
 
 dotenv.config()
 
@@ -18,9 +20,10 @@ app.use(cors())
 app.use(express.json())
 // app.use(express.urlencoded({ extended: true }))
 // userRouter is from routes/user.ts file
-app.use('/user', UserRouter)
+// app.use('/user', UserRouter)
 //
-
+app.use('/register', RegisterRouter)
+app.use('/login', LoginRouter)
 // Stripe
 // const striperoutes = require('./routes/stripe-routes')
 // app.use('/api/stripe', striperoutes)

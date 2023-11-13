@@ -157,7 +157,7 @@ const Cart = () => {
                 {auth.name ? <button className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg">
                   Check out
                 </button>: <button onClick={() => navigate('/login')} className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-lg">
-                  Log in to Check out
+                  Log in
                 </button>}
                 
                 <div className="continue-shopping">

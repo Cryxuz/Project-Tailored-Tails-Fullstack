@@ -27,13 +27,30 @@ const initialState: initialStateModel = {
   loginError: "",
   userLoaded: false,
 }
-
+// register
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (values, {rejectWithValue}) => {
     try{
     const token = await axios.post('http://localhost:3000/register', {
           name: values.name,
+          email: values.email,
+          password: values.password
+        })
+        localStorage.setItem('token', token.data)
+        return token.data
+    } catch(err) {
+      console.log(err.response.data)
+      return rejectWithValue(err.response.data)
+    }
+  }
+)
+// login
+export const loginUser = createAsyncThunk(
+  "auth/loginUser",
+  async (values, {rejectWithValue}) => {
+    try{
+    const token = await axios.post('http://localhost:3000/login', {
           email: values.email,
           password: values.password
         })
@@ -106,7 +123,35 @@ const authSlice = createSlice ({
         registerStatus: "rejected",
         registerError: action.payload instanceof Error ? action.payload.message : "An error occurred",
       }
+    })
+
+    // 
+
+    builder.addCase(loginUser.pending, (state, action) =>{
+      return {...state, loginStatus: "pending"}
     } )
+    builder.addCase(loginUser.fulfilled, (state,action) =>{
+      if(action.payload) {
+
+        const user = jwtDecode(action.payload)
+
+        return {
+          ...state,
+          token: action.payload,
+          name: user.name,
+          email: user.email,
+          _id: user.id,
+          loginStatus: "success"
+        }
+      } else return state
+    } )
+    builder.addCase(loginUser.rejected, (state,action) =>{
+      return {
+        ...state,
+        loginStatus: "rejected",
+        loginError: action.payload instanceof Error ? action.payload.message : "An error occurred",
+      }
+    })
   }
 })
 export const {loadUser, logoutUser } = authSlice.actions

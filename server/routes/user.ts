@@ -33,26 +33,26 @@ export const verifyToken = (
 }
 
 // register user
-router.post('/register', async (req: Request, res: Response) => {
-  const { username, password } = req.body
-  try {
-    const user = await User.findOne({ username })
+// router.post('/register', async (req: Request, res: Response) => {
+//   const { username, password } = req.body
+//   try {
+//     const user = await User.findOne({ username })
 
-    if (user) {
-      return res.status(400).json({ type: UserErrors.USERNAME_ALREADY_EXISTS })
-    }
-    // making password hash to hide it. always 10
-    const hashedPassword = await bcrypt.hash(password, 10)
-    // this will create a new instance in that collection/table
-    const newUser = new User({ username, password: hashedPassword })
-    await newUser.save()
+//     if (user) {
+//       return res.status(400).json({ type: UserErrors.USERNAME_ALREADY_EXISTS })
+//     }
+//     // making password hash to hide it. always 10
+//     const hashedPassword = await bcrypt.hash(password, 10)
+//     // this will create a new instance in that collection/table
+//     const newUser = new User({ username, password: hashedPassword })
+//     await newUser.save()
 
-    res.json({ message: 'User Registered Successfully' })
-  } catch (err) {
-    console.log('Error:', err)
-    res.status(500).json({ type: err })
-  }
-})
+//     res.json({ message: 'User Registered Successfully' })
+//   } catch (err) {
+//     console.log('Error:', err)
+//     res.status(500).json({ type: err })
+//   }
+// })
 
 // login route
 

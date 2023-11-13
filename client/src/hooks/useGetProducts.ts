@@ -1,17 +1,17 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+// import axios from 'axios'
+// import { useEffect, useState } from 'react'
 
-export const useGetProducts = () => {
-  const [products, setProducts] = useState([])
+// export const useGetProducts = () => {
+//   const [products, setProducts] = useState([])
 
-  const fetchProducts = async () => {
-    const products = await axios.get('http://localhost:3000/items')
-    setProducts(products.data.products)
-  }
+//   const fetchProducts = async () => {
+//     const products = await axios.get('http://localhost:3000/items')
+//     setProducts(products.data.products)
+//   }
 
-  useEffect(() => {
-    fetchProducts()
-  }, [])
+//   useEffect(() => {
+//     fetchProducts()
+//   }, [])
 
-  return { products, fetchProducts }
-}
+//   return { products, fetchProducts }
+// }

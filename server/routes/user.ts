@@ -56,28 +56,28 @@ router.post('/register', async (req: Request, res: Response) => {
 
 // login route
 
-router.post('/login', async (req: Request, res: Response) => {
-  const { username, password } = req.body
-  try {
-    // getting a user
-    const user = await User.findOne({ username })
-    if (!user) {
-      return res.status(400).json({ type: UserErrors.NO_USER_FOUND })
-    }
+// router.post('/login', async (req: Request, res: Response) => {
+//   const { username, password } = req.body
+//   try {
+//     // getting a user
+//     const user = await User.findOne({ username })
+//     if (!user) {
+//       return res.status(400).json({ type: UserErrors.NO_USER_FOUND })
+//     }
 
-    // checking if the password == hashed password. convert both password to hash first
-    const isPasswordValid = await bcrypt.compare(password, user.password)
-    if (!isPasswordValid) {
-      return res.status(400).json({ type: UserErrors.WRONG_CREDEMTIALS })
-    }
+//     // checking if the password == hashed password. convert both password to hash first
+//     const isPasswordValid = await bcrypt.compare(password, user.password)
+//     if (!isPasswordValid) {
+//       return res.status(400).json({ type: UserErrors.WRONG_CREDEMTIALS })
+//     }
 
-    // token
-    // const token = jwt.sign({ id: user._id }, 'secret')
-    // res.json({ token, userID: user._id })
-  } catch (err) {
-    res.status(500).json({ type: err })
-  }
-})
+//     // token
+//     // const token = jwt.sign({ id: user._id }, 'secret')
+//     // res.json({ token, userID: user._id })
+//   } catch (err) {
+//     res.status(500).json({ type: err })
+//   }
+// })
 
 router.post('/', async (req, res) => {
   const schema = Joi.object({

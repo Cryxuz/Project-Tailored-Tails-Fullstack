@@ -9,6 +9,7 @@ import { User } from '../schemas/user'
 import { ProductErrors, UserErrors } from '../routes/errors'
 import { verify } from 'jsonwebtoken'
 import { RegisterRouter } from '../routes/register'
+import {LoginRouter} from '../routes/login'
 
 dotenv.config()
 
@@ -22,6 +23,7 @@ app.use(express.json())
 // app.use('/user', UserRouter)
 //
 app.use('/register', RegisterRouter)
+app.use('/login', LoginRouter)
 // Stripe
 // const striperoutes = require('./routes/stripe-routes')
 // app.use('/api/stripe', striperoutes)

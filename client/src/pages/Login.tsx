@@ -8,8 +8,6 @@ const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
-  // console.log(auth)
-  console.log(auth.name)
 
   useEffect(() => {
     if (auth.name) {
@@ -17,9 +15,7 @@ const Login = () => {
       navigate("/items");
     }
   }, [auth._id, navigate]);
-
   const [user, setUser] = useState({
-   
     email: "",
     password: ""
   })
@@ -27,7 +23,6 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(loginUser(user))
-    
   }
   return (
 
@@ -48,8 +43,6 @@ const Login = () => {
         {auth.loginStatus === "rejected" ? <p>{auth.loginError}</p> : null}
       </div>
     </form>
-    
-    
   )
 }
 

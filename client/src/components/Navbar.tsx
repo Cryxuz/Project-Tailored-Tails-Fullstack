@@ -59,7 +59,7 @@ const Navbar = () => {
               </Link>  
               </div>
               :  
-              <div>
+              <div className='mx-auto'>
                  <Link
               to="/"
               className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"

@@ -1,80 +1,48 @@
-import axios from "axios"
-import { useState } from 'react'
-import {useCookies} from 'react-cookie'
-import {useNavigate} from 'react-router-dom'
-import { UserErrors } from '../../../server/routes/errors'
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { loginUser } from "../features/authSlice"
+import { useNavigate } from 'react-router-dom'
 
-const LoginPage = () => {
-  const [username, setUsername] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [_, setCookies] = useCookies(["access_token"])
+
+const Login = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const auth = useSelector((state) => state.auth)
 
-  const handleLogin = async () => {
-    try {
-     const result = await axios.post("http://localhost:3000/user/login", {
-        username,
-        password,
-      })
-      setCookies("access_token", result.data.token)
-      localStorage.setItem("userID", result.data.userId)
-      navigate('/items')
-    }  catch(err) {
-      let errorMessage : string = ""
-      switch (err.response.data.type) {
-        case UserErrors.NO_USER_FOUND:
-          errorMessage = "User doesn't exist"
-          break;
-        case UserErrors.WRONG_CREDEMTIALS:
-          errorMessage = "Wrong username/password combination"
-          break;
-        default:
-          errorMessage = "Something went wrong"
-      }
-      alert("ERROR: " + errorMessage)
-    }  
+  useEffect(() => {
+    if (auth.name) {
+      
+      navigate("/items");
+    }
+  }, [auth.name, navigate]);
+  
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  })
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    dispatch(loginUser(user))
   }
   return (
-  <div>
-    <div className="h-full w-full flex justify-center items-center mt-10 ">
-      <div className="p-8 rounded-lg shadow-md bg-slate-200">
-        <h2 className="text-2xl font-semibold mb-4">Login</h2>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Username:
-          </label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Enter Username"
-            className="w-full border border-gray-300 rounded py-2 px-3"
-          />
-        </div>
-        <div className="mb-6">
-          <label className="block text-gray-700 text-sm font-bold mb-2">
-            Password:
-          </label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="Enter Password"
-            className="w-full border border-gray-400 rounded py-2 px-3"
-          />
-        </div>
 
-        <button
-          onClick={handleLogin}
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-        >
-          Login
-        </button>
+    <form  onSubmit={handleSubmit} className="h-full w-full flex justify-center items-center mt-10 ">
+      <div className="p-8 rounded-lg shadow-md bg-slate-200">
+        <h2>Login</h2>  
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email:</label>
+          <input  className="w-full border border-gray-400 rounded py-2 px-3" type="email" placeholder="Enter Email" onChange={(e) => setUser({ ...user, email: e.target.value})}/>
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password:</label>
+          <input  className="w-full border border-gray-400 rounded py-2 px-3" type="password" placeholder="Enter Password" onChange={(e) => setUser({ ...user, password: e.target.value})}/>
+        </div>
+        <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">{auth.loginStatus === "pending" ? "Submitting" : "Login"}</button>
+        {auth.loginStatus === "rejected" ? <p>{auth.loginError}</p> : null}
       </div>
-    </div>
-  </div>
+    </form>
   )
 }
 
-export default LoginPage
+export default Login

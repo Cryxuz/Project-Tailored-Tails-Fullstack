@@ -1,4 +1,3 @@
-import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import Items from './pages/Items'
@@ -7,14 +6,13 @@ import Navbar from './components/Navbar'
 import { Outlet } from 'react-router-dom'
 import Footer from './components/Footer'
 import SingleItem from './pages/SingleItem'
-// import RegisterPage from './pages/OldRegister'
-import LoginPage from './pages/Login'
 import { ShopContextProvider } from './hooks/shop-context'
 import NotFound from './components/NotFound'
 import {ToastContainer} from "react-toastify"
 import "./App.css"
 import "react-toastify/dist/ReactToastify.css"
 import Register from './pages/Register'
+import Login from './pages/Login'
 
 const App = () => {
   return (
@@ -27,7 +25,7 @@ const App = () => {
           <Route path="/cart" element={<Cart />} />
           <Route path="/items/:itemId" element={<SingleItem />} />
           <Route path="/registration" element={<Register />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
           <Route path="/" element={<Home />} />
         </Routes>

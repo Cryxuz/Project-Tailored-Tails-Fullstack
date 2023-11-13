@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import {
   decreaseCartQuantity,
   removeFromCart,
@@ -10,9 +10,10 @@ import {
 import { useEffect } from 'react'
 
 const Cart = () => {
+  const auth = useSelector((state) => state.auth)
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const handleRemoveFromCart = (cartItem) => {
     dispatch(removeFromCart(cartItem))
   }
@@ -153,9 +154,12 @@ const Cart = () => {
                 Taxes and shipping calculated at checkout
               </p>
               <div className="flex flex-col">
-                <button className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg">
+                {auth.name ? <button className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg">
                   Check out
-                </button>
+                </button>: <button onClick={() => navigate('/login')} className="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-lg">
+                  Log in
+                </button>}
+                
                 <div className="continue-shopping">
                   <Link to="/items">
                     <button className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg mt-[5%] w-[100%]">

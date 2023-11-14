@@ -11,6 +11,8 @@ dotenv.config()
 
 const PORT = process.env.PORT || 3000
 const app = express()
+
+app.use(express.json())
 app.use(
   cors({
     origin: 'http://localhost:5173',
@@ -20,8 +22,6 @@ app.use(
   })
 )
 
-app.use(express.json())
-
 app.use('/register', RegisterRouter)
 app.use('/login', LoginRouter)
 app.use('/stripe', StripeRouter)
@@ -29,42 +29,6 @@ app.use('/stripe', StripeRouter)
 app.get('/items', async (req, res) => {
   const items = await itemModel.find()
   res.json(items)
-})
-
-app.get('/items/:itemId', async (req, res) => {
-  try {
-    const itemId = req.params.itemId
-    const item = await itemModel.findById(itemId)
-    console.log(item)
-    res.json(item)
-  } catch (err) {
-    res.status(400).json(err)
-  }
-})
-
-app.post('/items', async (req, res) => {
-  try {
-    const newItem = new itemModel({
-      name: req.body.name,
-      description: req.body.description,
-      category: req.body.category,
-      price: req.body.price,
-      imageUrl: req.body.imageUrl,
-      rating: req.body.rating,
-      stock: req.body.stock,
-    })
-    const createdItem = await newItem.save()
-    res.json(createdItem)
-  } catch (error) {
-    console.log(error)
-    res.status(500)
-  }
-})
-
-app.delete('/items/:itemId', async (req, res) => {
-  const itemId = req.params.itemId
-  const item = await itemModel.findByIdAndDelete(itemId)
-  res.json(item)
 })
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {

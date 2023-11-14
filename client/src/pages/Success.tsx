@@ -12,7 +12,7 @@ const Success = () => {
       <h2 className="text-4xl pb-[3%]">Order Successful!</h2>
       <p className="text-lg ">Thank you for your purchase. Your order has been successfully placed.</p>
     </div>
-    <div className="text-center mt-[7%]">
+    <div className="text-center mt-[7%] w-[70%] mx-auto">
       <h3 className="text-4xl pb-[3%]">Contact Information</h3>
       <p className="text-lg ">If you have any questions or concerns, please contact our customer support at FakeSupport@example.com.</p>
     </div>

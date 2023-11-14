@@ -22,45 +22,45 @@ const Navbar = () => {
       {/* Hamburger menu for smaller screens */}
       <div className="lg:hidden">
         {open ? (
-          <div className='mt-[200px] bg-slate-200 rounded-lg p-4'>
+        <div className='mt-[215px] bg-slate-200 rounded-lg p-4'>
           <FaTimes className="text-3xl cursor-pointer" onClick={handleMenu} />
-        <li className='py-2 list-none'>
-          <Link to="/" className="px-3 py-2 text-black font-semibold hover:underline">
-            Home
-          </Link>
-        </li>
-        <li className='py-2 list-none'>
-          <Link to="/items" className="px-3 py-2 text-black font-semibold hover:underline">
-            Items
-          </Link>
-        </li>
-        
-        <li className='py-2 list-none'>
-          <Link to="/cart" className="px-3 py-2 text-black font-semibold hover:underline">
-          Cart<span className='bg-slate-600 rounded-full px-2 py-[1px] m-2 text-white'>{cartTotalQuantity}</span> 
-          </Link>
-        </li>
-
-        {/* Authentication links */}
-        {!auth.name && (
-          <>
-            <li className="px-3 py-2 text-black font-semibold hover:underline list-none">
-              <Link to="/registration">Register</Link>
-            </li>
-            <li className="px-3 py-2 text-black font-semibold hover:underline list-none">
-              <Link to="/login">Login</Link>
-            </li>
-          </>
-        )}
-        {auth.name && (
-          <li className="px-3 py-2 text-black font-semibold hover:underline">
-            <Link to="/" onClick={() => {
-              dispatch(logoutUser(null));
-              toast.warning("You have logged out", { position: "bottom-left" });
-            }}>Logout</Link>
+          <li className='py-2 list-none'>
+            <Link to="/" className="px-3 py-2 font-semibold text-lg merriweather hover:underline">
+              Home
+            </Link>
           </li>
-        )}
-          </div>
+          <li className='py-2 list-none'>
+            <Link to="/items" className="px-3 py-2 font-semibold text-lg merriweather hover:underline">
+              Items
+            </Link>
+          </li>
+          
+          <li className='py-2 list-none'>
+            <Link to="/cart" className="px-3 py-2 font-semibold text-lg merriweather hover:underline">
+            Cart<span className='bg-slate-600 rounded-full px-2 py-[1px] m-2 text-white'>{cartTotalQuantity}</span> 
+            </Link>
+          </li>
+
+         
+          {!auth.name && (
+            <>
+              <li className="px-3 py-2 font-semibold text-lg merriweather hover:underline list-none">
+                <Link to="/registration">Register</Link>
+              </li>
+              <li className="px-3 py-2 font-semibold text-lg merriweather hover:underline list-none">
+                <Link to="/login">Login</Link>
+              </li>
+            </>
+          )}
+          {auth.name && (
+            <li className="px-3 py-2 font-semibold text-lg merriweather hover:underline">
+              <Link to="/" onClick={() => {
+                dispatch(logoutUser(null));
+                toast.warning("You have logged out", { position: "bottom-left" });
+              }}>Logout</Link>
+            </li>
+          )}
+        </div>
         )
         
         : 
@@ -71,36 +71,36 @@ const Navbar = () => {
       </div>
 
       {/* Navigation links */}
-      <ul className={`lg:flex items-center space-x-4 justify-end semi-bold merriweather text-xl;
+      <ul className={`lg:flex text-2xl merriweather items-center space-x-4 justify-end semi-bold;
       ${open ? 'hidden' : 'hidden'}`}>
         <li>
-          <Link to="/" className="px-3 py-2 text-black font-semibold hover:underline">
+          <Link to="/" className="px-3 py-2 font-semibold hover:underline">
             Home
           </Link>
         </li>
         <li>
-          <Link to="/items" className="px-3 py-2 text-black font-semibold hover:underline">
+          <Link to="/items" className="px-3 py-2 font-semibold hover:underline">
             Items
           </Link>
         </li>
         <li>
-          <Link to="/cart" className="px-3 py-2 text-black font-semibold hover:underline">
+          <Link to="/cart" className="px-3 py-2 font-semibold hover:underline">
           Cart<span className='bg-slate-600 rounded-full px-2 py-[1px] m-2 text-white'>{cartTotalQuantity}</span> 
           </Link>
         </li>
-        {/* Authentication links */}
+        
         {!auth.name && (
           <>
-            <li className="px-3 py-2 text-black font-semibold hover:underline">
+            <li className="px-3 py-2 font-semibold hover:underline">
               <Link to="/registration">Register</Link>
             </li>
-            <li className="px-3 py-2 text-black font-semibold hover:underline">
+            <li className="px-3 py-2 font-semibold hover:underline">
               <Link to="/login">Login</Link>
             </li>
           </>
         )}
         {auth.name && (
-          <li className="px-3 py-2 text-black font-semibold hover:underline">
+          <li className="px-3 py-2 font-semibold hover:underline">
             <Link to="/" onClick={() => {
               dispatch(logoutUser(null));
               toast.warning("You have logged out", { position: "bottom-left" });

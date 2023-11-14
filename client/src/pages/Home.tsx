@@ -6,7 +6,7 @@ function Home() {
 
     <div className="container mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 justify-center items-center m-[5%]">
-        <div>
+        <div className='m-[50px]'>
           <h1 className="m-auto text-7xl lg:text-8xl cursive text-center ">Tailored Tails</h1>
            <p className="text-lg text-center  py-[5%]">
             Where style meets pet comfort! We're your go-to destination for all things pet fashion, from charming shirts and playful costumes to adorable accessories. Our mission is to pamper your furry friends with high-quality, comfortable, and trendy products

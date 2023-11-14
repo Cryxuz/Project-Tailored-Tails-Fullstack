@@ -1,15 +1,20 @@
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import { setHeaders, url } from '../features/api'
 
 const CheckoutButton = ({ cartItems }) => {
   const user = useSelector((state) => state.auth)
 
   const handleCheckout = () => {
     axios
-      .post('http://localhost:3000/stripe/create-checkout-session', {
-        cartItems,
-        userId: user._id,
-      })
+      .post(
+        `${url}stripe/create-checkout-session`,
+        {
+          cartItems,
+          userId: user._id,
+        },
+        { ...setHeaders(), withCredentials: true }
+      )
       .then((res) => {
         console.log('response',res)
         if (res.data.url) {

@@ -11,7 +11,7 @@ if (!stripeKey) {
 const stripe = new Stripe(stripeKey)
 const router = express.Router()
 
-const YOUR_DOMAIN = 'http://localhost:5173'
+const YOUR_DOMAIN = 'http://localhost:3000'
 
 router.post('/create-checkout-session', async (req, res) => {
   const line_items = req.body.cartItems.map((item: any) => {

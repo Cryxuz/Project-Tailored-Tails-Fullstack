@@ -16,16 +16,25 @@ app.use(
     origin: 'http://localhost:5173',
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
-    optionsSuccessStatus: 200
-
+    optionsSuccessStatus: 204,
   })
 )
-
+// app.use(cors())
+app.options('*', cors())
 app.use(express.json())
 
 app.use('/register', RegisterRouter)
 app.use('/login', LoginRouter)
 app.use('/stripe', StripeRouter)
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept, x-auth-token'
+  )
+  res.header('Access-Control-Allow-Credentials', 'true')
+  next()
+})
 
 app.get('/items', async (req, res) => {
   const items = await itemModel.find()

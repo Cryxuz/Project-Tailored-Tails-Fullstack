@@ -13,7 +13,7 @@ const Items = ({ fetchItems }) => {
   const { data: items, error, isLoading } = useGetAllProductsQuery()
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1)
-  const itemsPerPage = 5
+  const itemsPerPage = 8
 
 
   const handleAddToCart = (item: unknown) => {
@@ -61,7 +61,7 @@ const Items = ({ fetchItems }) => {
           </p>
         </div>
       </div>
-      <div className=" grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 p-4 md:p-16">
+      <div className=" grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4 md:p-16">
         {currentItems.map((item) => (
           <div
             key={item._id}

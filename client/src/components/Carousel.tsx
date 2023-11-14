@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ItemInterface } from '../interfaces/iteminterface'
-import { AiFillCaretLeft, AiFillCaretRight } from 'react-icons/ai'
 
 const Carousel: React.FC = () => {
   const [images, setImages] = useState<ItemInterface[]>([])
@@ -23,7 +22,7 @@ const Carousel: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % (images.length - 3))
-    }, 5000)
+    }, 2500)
 
     return () => {
       clearInterval(timer)
@@ -57,18 +56,18 @@ const Carousel: React.FC = () => {
         ))}
       </div>
       <div className="absolute top-1/2 transform -translate-y-1/2 flex justify-between w-full">
-        <AiFillCaretLeft
+        <button
           onClick={handlePrevClick}
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-l"
+          className="bg-gray-400  hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
         >
-          Prev
-        </AiFillCaretLeft>
-        <AiFillCaretRight
+          ◀
+        </button>
+        <button
           onClick={handleNextClick}
-          className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-r"
+          className="bg-gray-400 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
         >
-          Next
-        </AiFillCaretRight>
+          ▶
+        </button>
       </div>
     </div>
   )

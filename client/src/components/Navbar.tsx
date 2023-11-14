@@ -49,7 +49,7 @@ const Navbar = () => {
               to="/cart"
               className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
             >
-              Cart<span className='bg-slate-600 rounded-full p-2 m-2'>({cartTotalQuantity})</span> 
+              Cart<span className='bg-slate-600 rounded-full px-2 py-[1px] m-2 text-white'>{cartTotalQuantity}</span> 
             </Link>
               <Link to="/" onClick={() => {
                 dispatch(logoutUser(null))
@@ -82,7 +82,7 @@ const Navbar = () => {
               to="/cart"
               className="px-[5%] text-black font-semibold hover:underline merriweather text-xl"
             >
-              Cart<span className='bg-slate-600 rounded-full p-2 m-2'>({cartTotalQuantity})</span> 
+              Cart<span className='bg-slate-600 rounded-full px-2 py-[1px] m-2 text-white'>{cartTotalQuantity}</span> 
             </Link>
                 <Link className="px-[5%] text-black font-semibold hover:underline merriweather text-xl" to="/login">Login</Link>
                 <Link className="px-[5%] text-black font-semibold hover:underline merriweather text-xl" to="/registration">Register</Link>

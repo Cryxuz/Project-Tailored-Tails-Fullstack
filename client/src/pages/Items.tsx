@@ -15,7 +15,6 @@ const Items = ({ fetchItems }) => {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 5
 
-  // const { addToCart: contextAddToCart } = useContext<IShopContext>(ShopContext)
 
   const handleAddToCart = (item: unknown) => {
     dispatch(addToCart(item))

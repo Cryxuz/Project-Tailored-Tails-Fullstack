@@ -11,7 +11,7 @@ if (!stripeKey) {
 const stripe = new Stripe(stripeKey)
 const router = express.Router()
 
-const YOUR_DOMAIN = 'http://localhost:3000'
+const YOUR_DOMAIN = 'http://localhost:5173'
 
 router.post('/create-checkout-session', async (req, res) => {
   const line_items = req.body.cartItems.map((item: any) => {
@@ -23,8 +23,8 @@ router.post('/create-checkout-session', async (req, res) => {
           images: [item.imageUrl],
           description: item.description,
           metadata: {
-            id: item.id
-          }
+            id: item.id,
+          },
         },
         unit_amount: item.price * 100,
       },
@@ -32,27 +32,27 @@ router.post('/create-checkout-session', async (req, res) => {
     }
   })
   const session = await stripe.checkout.sessions.create({
-    payment_method_types: ["card"],
+    payment_method_types: ['card'],
     shipping_address_collection: {
-      allowed_countries: ["AU", "NZ"],
+      allowed_countries: ['AU', 'NZ'],
     },
     shipping_options: [
       {
         shipping_rate_data: {
-          type: "fixed_amount",
+          type: 'fixed_amount',
           fixed_amount: {
             amount: 800,
-            currency: "nzd",
+            currency: 'nzd',
           },
-          display_name: "Free shipping",
+          display_name: 'Free shipping',
           // Delivers between 5-7 business days
           delivery_estimate: {
             minimum: {
-              unit: "business_day",
+              unit: 'business_day',
               value: 5,
             },
             maximum: {
-              unit: "business_day",
+              unit: 'business_day',
               value: 7,
             },
           },
@@ -60,20 +60,20 @@ router.post('/create-checkout-session', async (req, res) => {
       },
       {
         shipping_rate_data: {
-          type: "fixed_amount",
+          type: 'fixed_amount',
           fixed_amount: {
             amount: 1500,
-            currency: "nzd",
+            currency: 'nzd',
           },
-          display_name: "Next day air",
+          display_name: 'Next day air',
           // Delivers in exactly 1 business day
           delivery_estimate: {
             minimum: {
-              unit: "business_day",
+              unit: 'business_day',
               value: 1,
             },
             maximum: {
-              unit: "business_day",
+              unit: 'business_day',
               value: 1,
             },
           },
@@ -88,7 +88,7 @@ router.post('/create-checkout-session', async (req, res) => {
     success_url: `${YOUR_DOMAIN}/success`,
     cancel_url: `${YOUR_DOMAIN}/cart`,
   })
-  res.send({url: session.url})
+  res.send({ url: session.url })
   // res.redirect(303, session.url as string)
 })
 

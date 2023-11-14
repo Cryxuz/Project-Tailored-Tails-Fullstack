@@ -8,17 +8,15 @@ const Register = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
-  // console.log(auth)
-  console.log(auth.name)
 
-  // i changed auth._id to auth.name
+
   useEffect(() => {
     if (auth.name) {
       
       navigate("/items");
     }
   }, [auth._id, navigate]);
-// until here
+
 
   const [user, setUser] = useState({
     name: "",

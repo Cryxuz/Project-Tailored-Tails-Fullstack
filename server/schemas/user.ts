@@ -4,7 +4,6 @@ import { UserModel } from '../models/user'
 const UserSchema = new Schema<UserModel>({
   name: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  // purchasedItems:
   email: {
     type: String,
     required: true,
@@ -16,5 +15,4 @@ const UserSchema = new Schema<UserModel>({
   ],
 })
 
-// "user" is the name of the table
 export const User = model<UserModel>('user', UserSchema)

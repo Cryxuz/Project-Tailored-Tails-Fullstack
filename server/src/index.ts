@@ -28,11 +28,8 @@ app.use('/stripe', StripeRouter)
 
 app.get('/items', async (req, res) => {
   const items = await itemModel.find()
-  console.log(items)
   res.json(items)
 })
-
-//  GET by ID
 
 app.get('/items/:itemId', async (req, res) => {
   try {
@@ -45,12 +42,8 @@ app.get('/items/:itemId', async (req, res) => {
   }
 })
 
-// POST request.
-
 app.post('/items', async (req, res) => {
   try {
-    console.log(req.body)
-    // make a newItem  for the database.
     const newItem = new itemModel({
       name: req.body.name,
       description: req.body.description,
@@ -60,7 +53,6 @@ app.post('/items', async (req, res) => {
       rating: req.body.rating,
       stock: req.body.stock,
     })
-    // saving the newItem to the database.
     const createdItem = await newItem.save()
     res.json(createdItem)
   } catch (error) {
@@ -69,7 +61,6 @@ app.post('/items', async (req, res) => {
   }
 })
 
-// delete
 app.delete('/items/:itemId', async (req, res) => {
   const itemId = req.params.itemId
   const item = await itemModel.findByIdAndDelete(itemId)

@@ -28,7 +28,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
-      // if we have product in the cart we increase its quantity
 
       const itemIndex = state.cartItems.findIndex(
         (item) => item.name === action.payload.name
@@ -39,14 +38,14 @@ const cartSlice = createSlice({
           position: 'bottom-left',
         })
       } else {
-        // if we dont have product in the cart we run this code
+       
         const tempProduct = { ...action.payload, cartQuantity: 1 }
         state.cartItems.push(tempProduct)
         toast.success(`${action.payload.name} added to cart`, {
           position: 'bottom-left',
         })
       }
-      // cartItems is the key. this will add the cartItems to the localStorage and cartItems is the key
+      
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     removeFromCart(state, action) {

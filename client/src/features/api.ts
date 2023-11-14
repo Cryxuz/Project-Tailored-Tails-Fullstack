@@ -6,6 +6,5 @@ export const setHeaders = () => {
       'x-auth-token': localStorage.getItem('token'),
     },
   }
-
   return headers
 }

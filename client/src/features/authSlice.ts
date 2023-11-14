@@ -12,9 +12,7 @@ registerError: string | null,
 loginStatus: string,
 loginError: string,
 userLoaded: boolean,
-
 }
-
 
 const initialState: initialStateModel = {
   token: localStorage.getItem("token"),
@@ -27,7 +25,7 @@ const initialState: initialStateModel = {
   loginError: "",
   userLoaded: false,
 }
-// register
+
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (values, {rejectWithValue}) => {
@@ -45,7 +43,7 @@ export const registerUser = createAsyncThunk(
     }
   }
 )
-// login
+
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (values, {rejectWithValue}) => {
@@ -124,8 +122,6 @@ const authSlice = createSlice ({
         registerError: action.payload instanceof Error ? action.payload.message : "An error occurred",
       }
     })
-
-    // 
 
     builder.addCase(loginUser.pending, (state, action) =>{
       return {...state, loginStatus: "pending"}

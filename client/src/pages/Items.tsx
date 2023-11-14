@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { connect, useSelector } from 'react-redux'
+import { connect } from 'react-redux'
 import { fetchItems } from '../../redux/actions/itemsActions'
 import { Link } from 'react-router-dom'
 import { useGetAllProductsQuery } from '../features/productsApi'
@@ -7,14 +7,11 @@ import { useDispatch } from 'react-redux'
 import { addToCart } from '../features/cartSlice'
 
 const Items = ({ fetchItems }) => {
-  const auth = useSelector((state) => state.auth)
-  console.log(auth)
 
   const { data: items, error, isLoading } = useGetAllProductsQuery()
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 8
-
 
   const handleAddToCart = (item: unknown) => {
     dispatch(addToCart(item))
@@ -177,11 +174,10 @@ const Items = ({ fetchItems }) => {
 }
 const mapStateToProps = (state) => {
   return {
-    items: state.items, // Assuming the items are stored in the "items" slice of the Redux state
+    items: state.items, 
   }
 }
 
-// Map the dispatch functions to component props
 const mapDispatchToProps = {
   fetchItems,
 }

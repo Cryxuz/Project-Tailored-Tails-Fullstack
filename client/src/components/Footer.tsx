@@ -24,13 +24,10 @@ const Footer = () => {
             <br />
             <p>Auckland</p>
             <p className="pb-[3%]">+0123456789</p>
-            
             <p>Wellington</p>
             <p className="pb-[3%]">+0123456789</p>
-            
             <p>Christchurch</p>
             <p className="pb-[3%]">+0123456789</p>
-            
           </div>
         </div>
         <div className="text-center text-sm">

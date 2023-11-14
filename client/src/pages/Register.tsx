@@ -3,20 +3,16 @@ import { useDispatch, useSelector } from "react-redux"
 import { registerUser } from "../features/authSlice"
 import { useNavigate } from 'react-router-dom'
 
-
 const Register = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const auth = useSelector((state) => state.auth)
 
-
   useEffect(() => {
     if (auth.name) {
-      
       navigate("/items");
     }
   }, [auth._id, navigate]);
-
 
   const [user, setUser] = useState({
     name: "",
@@ -50,7 +46,6 @@ const Register = () => {
         {auth.registerStatus === "rejected" ? <p>{auth.registerError}</p> : null}
       </div>
     </form>
-    
     
   )
 }

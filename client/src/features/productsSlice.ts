@@ -23,13 +23,13 @@ export const productsFetch = createAsyncThunk<Item[], void>(
       return response?.data;
     } catch (error) {
       console.log(error);
-      throw error; // Rethrow the error to let the UI handle it if needed
+      throw error; 
     }
   }
 );
 
 const productsSlice = createSlice({
-  name: 'items', // Keep the name as 'products' or choose another appropriate name
+  name: 'items', 
   initialState,
   reducers: {},
   extraReducers: (builder) => {

@@ -1,4 +1,3 @@
-import { sign } from 'jsonwebtoken'
 import { UserModel } from '../models/user'
 var jwt = require('jsonwebtoken')
 

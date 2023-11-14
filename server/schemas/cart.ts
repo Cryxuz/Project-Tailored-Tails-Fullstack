@@ -1,6 +1,3 @@
-
-// Cart Schema
-
 import mongoose from "mongoose"
 
 const cartItemSchema = new mongoose.Schema({
@@ -17,12 +14,10 @@ const cartItemSchema = new mongoose.Schema({
     required: true,
   },
   price: {
-    // Represents a single item
     type: Number,
     required: true,
   },
   total_price: {
-    // Total cost of each item in cart
     type: Number,
     required: true,
   },

@@ -32,13 +32,12 @@ function SingleItem({
 
   const { itemId } = useParams()
   const [item, setItem] = useState<ItemInterface | null>(null)
-  console.log(item)
+
 
   useEffect(() => {
     axios
       .get<ItemInterface>(`http://localhost:3000/items/${itemId}`)
       .then((response) => {
-        console.log(response.data)
         setItem(response.data)
       })
       .catch((error) => {

@@ -17,14 +17,10 @@ function Home() {
               Check Out Our Products
             </button>
           </Link>
-          </div>
-          
+          </div>        
         </div>
-
         <img className="rounded-full lg:p-8" src="/images/bg-home.jpg" alt="" />
-
       </div>
-
       <div className="mt-12">
         <Carousel />
       </div>

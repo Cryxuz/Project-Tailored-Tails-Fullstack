@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux'
 
 const CheckoutButton = ({ cartItems }) => {
   const user = useSelector((state) => state.auth)
-
   const handleCheckout = () => {
     axios
       .post('http://localhost:3000/stripe/create-checkout-session', {
@@ -18,7 +17,6 @@ const CheckoutButton = ({ cartItems }) => {
       })
       .catch((error) => console.log(error))
   }
-
   return (
     <>
       <button

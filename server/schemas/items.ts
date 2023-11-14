@@ -1,6 +1,5 @@
 import mongoose from "mongoose"
 
-// Items Schema
 const itemSchema = new mongoose.Schema({
   name: {
     type: String,

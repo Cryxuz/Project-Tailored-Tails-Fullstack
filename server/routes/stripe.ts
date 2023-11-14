@@ -4,7 +4,6 @@ import * as dotenv from 'dotenv'
 dotenv.config()
 
 const stripeKey = process.env.STRIPE_KEY
-// const stripe = Stripe(process.env.STRIPE_KEY)
 if (!stripeKey) {
   throw new Error('Stripe key not provided')
 }
@@ -89,7 +88,7 @@ router.post('/create-checkout-session', async (req, res) => {
     cancel_url: `${YOUR_DOMAIN}/cart`,
   })
   res.send({ url: session.url })
-  // res.redirect(303, session.url as string)
+  
 })
 
 export { router as StripeRouter }

@@ -16,8 +16,8 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between shadow-lg h-20 px-[3%] py-[3%]">
-      <p className='text-5xl cursive text-center'><img className="inline pr-5" src="/images/logo.png" alt="" />Tailored Tails</p>
+    <nav className="flex items-center justify-between shadow-lg h-20 px-[3%] lg:py-[3%] py-[7%]">
+      <p className='text-5xl cursive'><img className="inline pr-5" src="/images/logo.png" alt="paw print icon" />Tailored Tails</p>
 
       {/* Hamburger menu for smaller screens */}
       <div className="lg:hidden">
@@ -34,14 +34,11 @@ const Navbar = () => {
               Items
             </Link>
           </li>
-          
           <li className='py-2 list-none'>
             <Link to="/cart" className="px-3 py-2 font-semibold text-lg hover:underline">
             Cart<span className='bg-slate-600 rounded-full px-2 py-[1px] m-2 text-white'>{cartTotalQuantity}</span> 
             </Link>
           </li>
-
-         
           {!auth.name && (
             <>
               <li className="px-3 py-2 font-semibold text-lg hover:underline list-none">
@@ -69,7 +66,6 @@ const Navbar = () => {
           <FaBars className="text-3xl cursor-pointer" onClick={handleMenu} />
         )}
       </div>
-
       {/* Navigation links */}
       <ul className={`lg:flex text-2xl items-center space-x-4 justify-end semi-bold;
       ${open ? 'hidden' : 'hidden'}`}>
@@ -89,7 +85,6 @@ const Navbar = () => {
             {cartTotalQuantity}</span> 
           </Link>
         </li>
-        
         {!auth.name && (
           <>
             <li className="px-3 py-2 font-semibold hover:underline">

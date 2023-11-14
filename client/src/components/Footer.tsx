@@ -1,27 +1,43 @@
 const Footer = () => {
   return (
-    <footer className="bg-gray-800 text-white py-8 mt-[5%]">
-      <div className="container mx-auto flex flex-col items-center">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-4 text-center">
+    <footer className="bg-slate-800 pb-8 pt-16 mt-[5%] merriweather border-gray-200 text-white">
+      <div className="container mx-auto flex flex-col items-center gap-[30px]">
+        <div className="grid grid-cols-1 lg:grid-cols-3 mb-4 text-center">
           <div>
-            <h4 className="text-xl font-semibold mb-2">About Us</h4>
+            <h4 className="text-2xl font-semibold mb-2">About Us</h4>
+            <br />
+            <p className="w-[50%] m-auto">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, fuga ratione? Dolore eum perferendis eveniet commodi, necessitatibus impedit. Est fugiat, consequuntur voluptates aut iusto ipsum at vero debitis ipsa non!</p>
           </div>
           <div>
-            <h4 className="text-xl font-semibold mb-2">Contact Us</h4>
+            <h4 className="text-2xl font-semibold mb-2">Contact Us</h4>
+            <br />
             <p>Email: info@example.com</p>
-            <p>Phone: 123-456-7890</p>
-          </div>
+            <p>Phone: 1203-456-7890</p>
+            <div className="flex justify-center my-[10%] gap-[3%]">
+              <img src="/icons/facebook.png" alt="" />
+              <img src="/icons/instagram.png" alt="" />
+              <img src="/icons/twitter.png" alt="" />
+              <img src="/icons/linkedin.png" alt="" /></div>
+            </div>
           <div>
-            <h4 className="text-xl font-semibold mb-2">Locations</h4>
+            <h4 className="text-2xl font-semibold mb-2">Locations</h4>
+            <br />
             <p>Auckland</p>
-            <p>Dunedin</p>
+            <p className="pb-[3%]">+0123456789</p>
+            
             <p>Wellington</p>
+            <p className="pb-[3%]">+0123456789</p>
+            
+            <p>Christchurch</p>
+            <p className="pb-[3%]">+0123456789</p>
+            
           </div>
         </div>
-        <div className="text-sm">
-          © {new Date().getFullYear()} Tailored Tails. All rights reserved.
-        </div>
-        <p className="text-xs">Images from FreekPik, Unsplash & Imagine</p>
+        <div className="text-center text-sm">
+          <p className=""> © 2023 Tailored Tails. All rights reserved.</p>
+          <p className="">Created by Kadin V & Paul T</p>
+          <p className="text-xs">Images from FreekPik, Unsplash & Imagine</p>
+        </div>  
       </div>
     </footer>
   )

@@ -16,7 +16,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="flex items-center justify-between bg-white shadow-md h-20 px-[3%] py-[3%]">
+    <nav className="flex items-center justify-between shadow-lg h-20 px-[3%] py-[3%]">
       <p className='text-5xl cursive text-center'><img className="inline pr-5" src="/images/logo.png" alt="" />Tailored Tails</p>
 
       {/* Hamburger menu for smaller screens */}

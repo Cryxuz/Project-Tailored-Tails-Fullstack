@@ -37,8 +37,7 @@ const Navbar = () => {
           
           <li className='py-2 list-none'>
             <Link to="/cart" className="px-3 py-2 font-semibold text-lg hover:underline">
-            Cart<span className='bg-slate-600 rounded-full px-2 py-[1px] m-2 text-white'>
-              {cartTotalQuantity}</span> 
+            Cart<span className='bg-slate-600 rounded-full px-2 py-[1px] m-2 text-white'>{cartTotalQuantity}</span> 
             </Link>
           </li>
 

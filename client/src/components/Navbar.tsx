@@ -25,18 +25,18 @@ const Navbar = () => {
         <div className='mt-[215px] bg-slate-200 rounded-lg p-4'>
           <FaTimes className="text-3xl cursor-pointer" onClick={handleMenu} />
           <li className='py-2 list-none'>
-            <Link to="/" className="px-3 py-2 font-semibold text-lg merriweather hover:underline">
+            <Link to="/" className="px-3 py-2 font-semibold text-lg hover:underline">
               Home
             </Link>
           </li>
           <li className='py-2 list-none'>
-            <Link to="/items" className="px-3 py-2 font-semibold text-lg merriweather hover:underline">
+            <Link to="/items" className="px-3 py-2 font-semibold text-lg hover:underline">
               Items
             </Link>
           </li>
           
           <li className='py-2 list-none'>
-            <Link to="/cart" className="px-3 py-2 font-semibold text-lg merriweather hover:underline">
+            <Link to="/cart" className="px-3 py-2 font-semibold text-lg hover:underline">
             Cart<span className='bg-slate-600 rounded-full px-2 py-[1px] m-2 text-white'>{cartTotalQuantity}</span> 
             </Link>
           </li>
@@ -44,16 +44,16 @@ const Navbar = () => {
          
           {!auth.name && (
             <>
-              <li className="px-3 py-2 font-semibold text-lg merriweather hover:underline list-none">
+              <li className="px-3 py-2 font-semibold text-lg hover:underline list-none">
                 <Link to="/registration">Register</Link>
               </li>
-              <li className="px-3 py-2 font-semibold text-lg merriweather hover:underline list-none">
+              <li className="px-3 py-2 font-semibold text-lg hover:underline list-none">
                 <Link to="/login">Login</Link>
               </li>
             </>
           )}
           {auth.name && (
-            <li className="px-3 py-2 font-semibold text-lg merriweather hover:underline">
+            <li className="px-3 py-2 font-semibold text-lg hover:underline">
               <Link to="/" onClick={() => {
                 dispatch(logoutUser(null));
                 toast.warning("You have logged out", { position: "bottom-left" });
@@ -71,7 +71,7 @@ const Navbar = () => {
       </div>
 
       {/* Navigation links */}
-      <ul className={`lg:flex text-2xl merriweather items-center space-x-4 justify-end semi-bold;
+      <ul className={`lg:flex text-2xl items-center space-x-4 justify-end semi-bold;
       ${open ? 'hidden' : 'hidden'}`}>
         <li>
           <Link to="/" className="px-3 py-2 font-semibold hover:underline">

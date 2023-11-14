@@ -32,8 +32,8 @@ router.post('/create-checkout-session', async (req, res) => {
     success_url: `${YOUR_DOMAIN}/success`,
     cancel_url: `${YOUR_DOMAIN}/cart`,
   })
-
-  res.redirect(303, session.url as string)
+  res.send({url: session.url})
+  // res.redirect(303, session.url as string)
 })
 
 export { router as StripeRouter }

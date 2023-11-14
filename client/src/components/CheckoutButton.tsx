@@ -11,8 +11,9 @@ const CheckoutButton = ({ cartItems }) => {
         userId: user._id,
       })
       .then((res) => {
-        if (res.data.data.url) {
-          window.location.href = res.data.data.url
+        console.log('response',res)
+        if (res.data.url) {
+          window.location.href = res.data.url
         }
       })
       .catch((error) => console.log(error))

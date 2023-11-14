@@ -33,7 +33,8 @@ const Cart = () => {
 
   useEffect(() => {
     dispatch(getTotals())
-  }, [cart])
+  }, [cart, dispatch])
+
   return (
     <div className="py-[2rem] px-[4rem] my-[rem]">
       <h2 className="text-4xl text-center">Shopping Cart</h2>
@@ -157,6 +158,7 @@ const Cart = () => {
               <div className="flex flex-col">
                 {auth.name ? (
                   <CheckoutButton cartItems={cart.cartItems} />
+                  
                 ) : (
                   <button
                     onClick={() => navigate('/login')}

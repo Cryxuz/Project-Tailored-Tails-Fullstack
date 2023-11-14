@@ -18,7 +18,6 @@ const App = () => {
   return (
     <div>
       <ToastContainer />
-
       <Navbar />
       <Routes>
         <Route path="/success" element={<Success />} />
@@ -30,7 +29,6 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
       </Routes>
-
       <main className="container mx-auto p-4">
         <Outlet />
       </main>

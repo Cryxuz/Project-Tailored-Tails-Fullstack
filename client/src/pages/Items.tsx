@@ -48,11 +48,17 @@ const Items = ({ fetchItems }) => {
             alt=""
           />
         </div>
-        <div className="col-span bg-cyan-50 p-10">
-          <h2 className="text-3xl text-center md:text-left md:text-5xl px-[3%]">
+        <div className="  p-10">
+          <h2 className="text-3xl text-center md:text-left md:text-3xl px-[3%]">
             Costumes, Hats, Accessories & More!
           </h2>
           <br />
+          <p className="text-center md:text-left text-xl p-[3%]">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum
+            eligendi aliquid, fugiat assumenda dicta amet quas animi iure
+            repudiandae? Impedit, illo cum id eligendi sapiente ducimus veniam
+            aperiam maiores ratione.
+          </p>
           <p className="text-center md:text-left text-xl p-[3%]">
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum
             eligendi aliquid, fugiat assumenda dicta amet quas animi iure

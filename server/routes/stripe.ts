@@ -17,7 +17,7 @@ router.post('/create-checkout-session', async (req, res) => {
   const line_items = req.body.cartItems.map((item: any) => {
     return {
       price_data: {
-        currency: 'usd',
+        currency: 'nzd',
         product_data: {
           name: item.name,
           images: [item.imageUrl],
@@ -32,6 +32,57 @@ router.post('/create-checkout-session', async (req, res) => {
     }
   })
   const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    shipping_address_collection: {
+      allowed_countries: ["AU", "NZ"],
+    },
+    shipping_options: [
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: {
+            amount: 800,
+            currency: "nzd",
+          },
+          display_name: "Free shipping",
+          // Delivers between 5-7 business days
+          delivery_estimate: {
+            minimum: {
+              unit: "business_day",
+              value: 5,
+            },
+            maximum: {
+              unit: "business_day",
+              value: 7,
+            },
+          },
+        },
+      },
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: {
+            amount: 1500,
+            currency: "nzd",
+          },
+          display_name: "Next day air",
+          // Delivers in exactly 1 business day
+          delivery_estimate: {
+            minimum: {
+              unit: "business_day",
+              value: 1,
+            },
+            maximum: {
+              unit: "business_day",
+              value: 1,
+            },
+          },
+        },
+      },
+    ],
+    phone_number_collection: {
+      enabled: true,
+    },
     line_items,
     mode: 'payment',
     success_url: `${YOUR_DOMAIN}/success`,

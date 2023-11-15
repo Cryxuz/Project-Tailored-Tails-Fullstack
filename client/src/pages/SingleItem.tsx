@@ -66,7 +66,7 @@ function SingleItem({
             }}
           >
             <p className="text-bold text-lg">Hover image to magnify</p>
-            <img
+            <img className='w-[500px] rounded-md'
               src={item.imageUrl}
               style={{ height: height, width: width }}
               onMouseEnter={(e) => {

@@ -3,17 +3,6 @@ import itemModel from '../schemas/items'
 
 const router = express.Router()
 
-router.get('/items/:itemId', async (req, res) => {
-  try {
-    const itemId = req.params.itemId
-    const item = await itemModel.findById(itemId)
-    console.log(item)
-    res.json(item)
-  } catch (err) {
-    res.status(400).json(err)
-  }
-})
-
 router.post('/items', async (req, res) => {
   try {
     const newItem = new itemModel({

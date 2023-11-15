@@ -17,15 +17,15 @@ const Success = () => {
       <p className="text-lg ">If you have any questions or concerns, please contact our customer support at FakeSupport@example.com.</p>
     </div>
     <div className="flex flex-col items-center justify-center gap-4 mt-[5%]">
+      <Link to="/items"><button className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg">
+         Continue Shopping
+      </button></Link>
       <button className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg">
-         <Link to="/items">Continue Shopping</Link>
-      </button>
-      <button className="bg-orange-600 hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-lg">
-        <Link to="/" onClick={() => {
-              dispatch(logoutUser(null));
-              toast.warning("You have logged out", { position: "bottom-left" });
-              }}>Logout
-        </Link>
+      <Link to="/" onClick={() => {
+          dispatch(logoutUser(null));
+          toast.warning("You have logged out", { position: "bottom-left" });
+          }}>Logout
+      </Link>
       </button>
     </div>
   </div>

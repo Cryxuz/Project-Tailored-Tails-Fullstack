@@ -17,14 +17,16 @@ const Navbar = () => {
 
   return (
     <nav className="flex items-center justify-between shadow-lg h-20 px-[3%] lg:py-[3%] py-[7%]">
-      <p className="text-5xl cursive">
-        <img
-          className="inline pr-5"
-          src="/images/logo.png"
-          alt="paw print icon"
-        />
-        Tailored Tails
-      </p>
+      <Link to="/">
+        <p className="text-5xl cursive">
+          <img
+            className="inline pr-5"
+            src="/images/logo.png"
+            alt="paw print icon"
+          />
+          Tailored Tails
+        </p>
+      </Link>
 
       {/* Hamburger menu for smaller screens */}
       <div className="lg:hidden">

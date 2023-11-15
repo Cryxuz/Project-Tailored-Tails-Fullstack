@@ -31,7 +31,7 @@ const Register = () => {
     <form  onSubmit={handleSubmit} className="mx-auto p-8 h-full w-full mt-10 grid grid-cols-2 items-center justify-center gap-[3%]">
       <div className="flex flex-col w-[50%] items-center ml-auto">
         <h2 className="text-center text-xl mb-[5px]">Already have an account?</h2>
-        <p className="text-center">Log in and start shopping for your favorite costumes for your furry friends</p>
+        <p className="text-center w-[80%]">Log in and start shopping for your favorite costumes for your furry friends</p>
         <button className="p-2 px-4 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
           Log in
         </button>

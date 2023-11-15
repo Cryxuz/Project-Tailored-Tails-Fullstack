@@ -2,11 +2,9 @@ const Footer = () => {
   return (
     <footer className="bg-slate-800 pb-8 pt-16 mt-[5%]  border-gray-200 text-white">
       <div className="container mx-auto flex flex-col items-center gap-[30px]">
-        <div className="grid grid-cols-1 lg:grid-cols-3 mb-4 text-center">
+        <div className="grid grid-cols-1 lg:grid-cols-3 mb-4 text-center gap-[20%]">
           <div>
             <h4 className="text-2xl font-semibold mb-2">About Us</h4>
-            <br />
-            <p className="w-[50%] m-auto">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, fuga ratione? Dolore eum perferendis eveniet commodi, necessitatibus impedit. Est fugiat, consequuntur voluptates aut iusto ipsum at vero debitis ipsa non!</p>
           </div>
           <div>
             <h4 className="text-2xl font-semibold mb-2">Contact Us</h4>

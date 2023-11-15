@@ -29,7 +29,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
         <Route path="/" element={<Home />} />
       </Routes>
-      <main className="container mx-auto p-4">
+      <main className="container mx-auto p-2">
         <Outlet />
       </main>
       <Footer />

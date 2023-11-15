@@ -25,8 +25,7 @@ const Register = () => {
     dispatch(registerUser(user))
   }
   return (
-
-    <form  onSubmit={handleSubmit} className="h-full w-full flex justify-center items-center mt-10 ">
+    <form  onSubmit={handleSubmit} className="gap-[10%] p-8 h-full w-full flex justify-center items-center mt-10">
       <div className="p-8 rounded-lg shadow-md bg-slate-200">
         <h2 className="text-xl">Register</h2>
         <br />
@@ -46,7 +45,6 @@ const Register = () => {
         {auth.registerStatus === "rejected" ? <p>{auth.registerError}</p> : null}
       </div>
     </form>
-    
   )
 }
 

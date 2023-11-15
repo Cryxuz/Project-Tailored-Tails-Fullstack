@@ -26,7 +26,7 @@ const Login = () => {
     dispatch(loginUser(user))
   }
   return (
-
+    <>
     <form  onSubmit={handleSubmit} className="h-full w-full flex justify-center items-center mt-10 ">
       <div className="p-8 rounded-lg shadow-md bg-slate-200">
         <h2 className="text-xl">Login</h2>  
@@ -43,6 +43,7 @@ const Login = () => {
         {auth.loginStatus === "rejected" ? <p>{auth.loginError}</p> : null}
       </div>
     </form>
+    </>
   )
 }
 

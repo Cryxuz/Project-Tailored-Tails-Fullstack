@@ -32,7 +32,7 @@ const Register = () => {
       <div className="flex flex-col w-[50%] items-center ml-auto">
         <h2 className="text-center text-xl mb-[5px]">Already have an account?</h2>
         <p className="text-center">Log in and start shopping for your favorite costumes for your furry friends</p>
-        <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
+        <button className="p-2 px-4 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
           Log in
         </button>
       </div>

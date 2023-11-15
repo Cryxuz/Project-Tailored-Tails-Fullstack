@@ -50,7 +50,7 @@ const Navbar = () => {
             </>
           )}
           {auth.name && (
-            <li className="px-3 py-2 font-semibold text-lg hover:underline">
+            <li className="px-3 py-2 font-semibold text-lg hover:underline list-none">
               <Link to="/" onClick={() => {
                 dispatch(logoutUser(null));
                 toast.warning("You have logged out", { position: "bottom-left" });

@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <footer className="bg-slate-800 pb-8 pt-16 mt-[5%]  border-gray-200 text-white">
       <div className="container mx-auto flex flex-col items-center gap-[30px]">
-        <div className="grid grid-cols-1 lg:grid-cols-3 mb-4 text-center gap-[20%]">
+        <div className="lg:grid lg:grid-cols-3 mb-4 text-center gap-[20%]">
           <div>
             <h4 className="text-2xl font-semibold mb-2">About Us</h4>
           </div>
@@ -21,11 +21,11 @@ const Footer = () => {
             <h4 className="text-2xl font-semibold mb-2">Locations</h4>
             <br />
             <p>Auckland</p>
-            <p className="pb-[3%]">+0123456789</p>
+            <p className="pb-[5%]">+0123456789</p>
             <p>Wellington</p>
-            <p className="pb-[3%]">+0123456789</p>
+            <p className="pb-[5%]">+0123456789</p>
             <p>Christchurch</p>
-            <p className="pb-[3%]">+0123456789</p>
+            <p className="pb-[5%]">+0123456789</p>
           </div>
         </div>
         <div className="text-center text-sm">

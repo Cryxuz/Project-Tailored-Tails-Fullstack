@@ -29,14 +29,8 @@ const Login = () => {
     <div className="py-[6%]">
       <h1 className="text-center pt-[2%] text-5xl">Please Log in to continue</h1>
     <form  onSubmit={handleSubmit} className="h-full w-full grid grid-cols-2 justify-center items-center mt-10 gap-[3%]">
-      <div className="flex flex-col w-[50%] items-center ml-auto">
-        <h2 className="text-xl mb-[5px]">Create an account</h2>
-        <p className="text-center">It's easy, free and only takes a moment</p>
-        <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
-          Register
-        </button>
-      </div>
-      <div className="p-8 rounded-lg  w-[50%] mr-auto">
+      
+      <div className="p-8 rounded-lg  w-[50%] ml-auto">
         <h2 className="text-xl">Login</h2>  
         <br />
         <div className="mb-4">
@@ -50,7 +44,13 @@ const Login = () => {
         <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">{auth.loginStatus === "pending" ? "Submitting" : "Login"}</button>
         {auth.loginStatus === "rejected" ? <p>{auth.loginError}</p> : null}
       </div>
-      
+      <div className="flex flex-col w-[50%] items-center mr-auto">
+        <h2 className="text-xl mb-[5px]">Create an account</h2>
+        <p className="text-center">It's easy, free and only takes a moment</p>
+        <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
+          Register
+        </button>
+      </div>
     </form>
     </div>
   )

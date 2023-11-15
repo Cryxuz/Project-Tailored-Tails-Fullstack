@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { registerUser } from "../features/authSlice"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -51,9 +51,9 @@ const Register = () => {
       <div className="flex flex-col w-[50%] items-center mr-auto">
         <h2 className="text-center text-xl mb-[5px]">Already have an account?</h2>
         <p className="text-center w-[80%]">Log in and start shopping for your favorite costumes for your furry friends</p>
-        <button className="p-2 px-4 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
+        <Link to='/login'><button className="p-2 px-4 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
           Log in
-        </button>
+        </button></Link>
       </div>
     </form>
     

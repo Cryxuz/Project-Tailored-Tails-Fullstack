@@ -11,7 +11,7 @@ const Footer = () => {
             <br />
             <p>Email: info@example.com</p>
             <p>Phone: 1203-456-7890</p>
-            <div className="flex justify-center my-[10%] gap-[3%]">
+            <div className="flex justify-center my-[10%] gap-[10%]">
               <img src="/icons/facebook.png" alt="" />
               <img src="/icons/instagram.png" alt="" />
               <img src="/icons/twitter.png" alt="" />

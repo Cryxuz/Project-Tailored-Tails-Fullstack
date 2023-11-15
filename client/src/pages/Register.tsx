@@ -25,8 +25,18 @@ const Register = () => {
     dispatch(registerUser(user))
   }
   return (
-    <form  onSubmit={handleSubmit} className="gap-[10%] p-8 h-full w-full flex justify-center items-center mt-10">
-      <div className="p-8 rounded-lg shadow-md bg-slate-200">
+    
+    <div className="py-[2%]">
+      <h1 className="text-center pt-[2%] text-5xl">Registration Page</h1>
+    <form  onSubmit={handleSubmit} className="mx-auto p-8 h-full w-full mt-10 grid grid-cols-2 items-center justify-center gap-[3%]">
+      <div className="flex flex-col w-[50%] items-center ml-auto">
+        <h2 className="text-center text-xl mb-[5px]">Already have an account?</h2>
+        <p className="text-center">Log in and start shopping for your favorite costumes for your furry friends</p>
+        <button className="p-2 bg-orange-600 rounded-lg text-white hover:bg-orange-500 mt-4">
+          Log in
+        </button>
+      </div>
+      <div className="p-8 rounded-lg  w-[50%] mr-auto">
         <h2 className="text-xl">Register</h2>
         <br />
         <div className="mb-4">
@@ -44,7 +54,10 @@ const Register = () => {
         <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700">{auth.registerStatus === "pending" ? "Submitting" : "Register"}</button>
         {auth.registerStatus === "rejected" ? <p>{auth.registerError}</p> : null}
       </div>
+      
     </form>
+    
+  </div>
   )
 }
 

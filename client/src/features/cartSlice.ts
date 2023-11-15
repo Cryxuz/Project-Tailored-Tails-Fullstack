@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 interface CartItems {
   name: string
-  id: string
+  id: number
   price: number
   cartQuantity: number
 }
@@ -28,7 +28,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart(state, action) {
-
       const itemIndex = state.cartItems.findIndex(
         (item) => item.name === action.payload.name
       )
@@ -38,14 +37,13 @@ const cartSlice = createSlice({
           position: 'bottom-left',
         })
       } else {
-       
         const tempProduct = { ...action.payload, cartQuantity: 1 }
         state.cartItems.push(tempProduct)
         toast.success(`${action.payload.name} added to cart`, {
           position: 'bottom-left',
         })
       }
-      
+
       localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     removeFromCart(state, action) {
@@ -60,26 +58,28 @@ const cartSlice = createSlice({
       })
     },
     decreaseCartQuantity(state, action) {
+      const { id, name } = action.payload
       const itemIndex = state.cartItems.findIndex(
-        (cartItem) => cartItem.id === action.payload.id
+        (cartItem) => cartItem.id === id
       )
-      if (state.cartItems[itemIndex].cartQuantity > 1) {
-        state.cartItems[itemIndex].cartQuantity -= 1
 
-        toast.info(`Decreased ${action.payload.name} cart quantity`, {
-          position: 'bottom-left',
-        })
-      } else if (state.cartItems[itemIndex].cartQuantity === 1) {
-        const nextCartItems = state.cartItems.filter(
-          (cartItem) => cartItem.id !== action.payload.id
-        )
-        state.cartItems = nextCartItems
+      if (itemIndex !== -1) {
+        const currentQuantity = state.cartItems[itemIndex].cartQuantity
 
-        toast.error(`${action.payload.name} removed from cart`, {
-          position: 'bottom-left',
-        })
+        if (currentQuantity > 1) {
+          state.cartItems[itemIndex].cartQuantity -= 1
+          toast.info(`Decreased ${name} cart quantity`, {
+            position: 'bottom-left',
+          })
+        } else {
+          state.cartItems.splice(itemIndex, 1)
+          toast.error(`${name} removed from cart`, {
+            position: 'bottom-left',
+          })
+        }
+
+        localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
       }
-      localStorage.setItem('cartItems', JSON.stringify(state.cartItems))
     },
     clearCart(state) {
       state.cartItems = []

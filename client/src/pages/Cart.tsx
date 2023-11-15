@@ -21,6 +21,7 @@ const Cart = () => {
 
   const handleDecreaseCartQuantity = (cartItem) => {
     dispatch(decreaseCartQuantity(cartItem))
+    console.log(cartItem)
   }
 
   const handleIncreaseCartQuantity = (cartItem) => {
@@ -158,7 +159,6 @@ const Cart = () => {
               <div className="flex flex-col">
                 {auth.name ? (
                   <CheckoutButton cartItems={cart.cartItems} />
-                  
                 ) : (
                   <button
                     onClick={() => navigate('/login')}

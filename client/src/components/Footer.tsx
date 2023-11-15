@@ -4,7 +4,9 @@ const Footer = () => {
       <div className="container mx-auto flex flex-col items-center gap-[30px]">
         <div className="lg:grid lg:grid-cols-3 mb-4 text-center gap-[20%]">
           <div>
-            <h4 className="text-2xl font-semibold mb-2">About Us</h4>
+            <h4 className="text-2xl font-semibold mb-2 hover:underline cursor-pointer ">
+              About Us
+            </h4>
           </div>
           <div>
             <h4 className="text-2xl font-semibold mb-2">Contact Us</h4>
@@ -15,8 +17,9 @@ const Footer = () => {
               <img src="/icons/facebook.png" alt="" />
               <img src="/icons/instagram.png" alt="" />
               <img src="/icons/twitter.png" alt="" />
-              <img src="/icons/linkedin.png" alt="" /></div>
+              <img src="/icons/linkedin.png" alt="" />
             </div>
+          </div>
           <div>
             <h4 className="text-2xl font-semibold mb-2">Locations</h4>
             <br />
@@ -32,7 +35,7 @@ const Footer = () => {
           <p className=""> © 2023 Tailored Tails. All rights reserved.</p>
           <p className="">Created by Kadin V & Paul T</p>
           <p className="text-xs">Images from FreekPik, Unsplash & Imagine</p>
-        </div>  
+        </div>
       </div>
     </footer>
   )

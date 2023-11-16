@@ -13,6 +13,9 @@ interface User {
   name: string
   email: string
 }
+export interface RootState {
+  auth: initialStateModel;
+}
 
 interface initialStateModel {
   token: string | null

@@ -2,11 +2,12 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { registerUser } from "../features/authSlice"
 import { Link, useNavigate } from 'react-router-dom'
+import {RootState} from '../features/authSlice'
 
 const Register = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const auth = useSelector((state) => state.auth)
+  const auth = useSelector((state: RootState) => state.auth)
 
   useEffect(() => {
     if (auth.name) {

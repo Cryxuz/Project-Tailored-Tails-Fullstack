@@ -30,11 +30,11 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(loginUser(user))
+    dispatch(loginUser(user) as any)
   }
   return (
     <div className="py-[6%]">
-      <h1 className="text-center pt-[2%] text-5xl">
+      <h1 className="text-center pt -[2%] text-5xl">
         Please Log in to continue
       </h1>
       <form

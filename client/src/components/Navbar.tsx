@@ -6,10 +6,22 @@ import { logoutUser } from '../features/authSlice'
 import { toast } from 'react-toastify'
 
 const Navbar = () => {
+  interface CartState {
+    cartTotalQuantity: number
+  }
+
+  interface AuthState {
+    name: string
+  }
+
+  interface RootState {
+    cart: CartState
+    auth: AuthState
+  }
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
-  const { cartTotalQuantity } = useSelector((state) => state.cart)
-  const auth = useSelector((state) => state.auth)
+  const { cartTotalQuantity } = useSelector((state: RootState) => state.cart)
+  const auth = useSelector((state: RootState) => state.auth)
 
   const handleMenu = () => {
     setOpen((prev) => !prev)

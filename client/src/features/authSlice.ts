@@ -3,7 +3,7 @@ import axios from 'axios'
 import { jwtDecode } from 'jwt-decode'
 
 interface Values {
-  name: string
+  name?: string
   email: string
   password: string
 }

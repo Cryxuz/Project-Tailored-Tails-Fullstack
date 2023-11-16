@@ -1,8 +1,9 @@
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import {RootState} from '../features/authSlice'
 
 const CheckoutButton = ({ cartItems }) => {
-  const user = useSelector((state) => state.auth)
+  const user = useSelector((state: RootState) => state.auth)
   const handleCheckout = () => {
     axios
       .post('http://localhost:3000/stripe/create-checkout-session', {

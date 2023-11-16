@@ -42,7 +42,7 @@ const Items = ({ fetchItems }) => {
           <img
             className="w-[70%] md:w-[80%] lg:w-[60%] rotate-[-15deg] rounded-lg"
             src="/images/items-page.jpg"
-            alt=""
+            alt="dog with scarf"
           />
         </div>
         <div className="  p-10">

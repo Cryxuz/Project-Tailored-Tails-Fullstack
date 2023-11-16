@@ -9,10 +9,24 @@ import {
 } from '../features/cartSlice'
 import { useEffect } from 'react'
 import CheckoutButton from '../components/CheckoutButton'
+interface CartState {
+  cartItems: any
+  cartTotalAmount: number
+  cartTotalQuantity: number
+}
+
+interface AuthState {
+  name: string
+}
+
+interface RootState {
+  cart: CartState
+  auth: AuthState
+}
 
 const Cart = () => {
-  const auth = useSelector((state) => state.auth)
-  const cart = useSelector((state) => state.cart)
+  const auth = useSelector((state: RootState) => state.auth)
+  const cart = useSelector((state: RootState) => state.cart)
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const handleRemoveFromCart = (cartItem) => {

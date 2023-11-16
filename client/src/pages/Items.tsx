@@ -8,7 +8,7 @@ import { addToCart } from '../features/cartSlice'
 
 const Items = ({ fetchItems }) => {
 
-  const { data: items, error, isLoading } = useGetAllProductsQuery()
+  const { data: items, error, isLoading } = useGetAllProductsQuery({})
   const dispatch = useDispatch()
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 8

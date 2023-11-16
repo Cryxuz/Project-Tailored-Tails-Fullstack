@@ -30,7 +30,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(loginUser(user))
+    dispatch(loginUser(user) as any)
   }
   return (
     <div className="py-[6%]">

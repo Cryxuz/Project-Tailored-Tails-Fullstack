@@ -8,6 +8,9 @@ import { itemsApi } from './features/productsApi.ts'
 import cartReducer, { getTotals } from './features/cartSlice.ts'
 import productsReducer, { productsFetch } from './features/productsSlice.js'
 import authReducer, { loadUser } from './features/authSlice.ts'
+import { disableReactDevTools } from '@fvilers/disable-react-devtools'
+
+if(process.env.NODE_ENV === 'production') disableReactDevTools()
 
 const store = configureStore({
   reducer: {
@@ -18,6 +21,7 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(itemsApi.middleware),
+    devTools: false
 })
 
 store.dispatch(productsFetch())

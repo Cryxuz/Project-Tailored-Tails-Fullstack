@@ -11,8 +11,10 @@ const Footer = () => {
           <div>
             <h4 className="text-2xl font-semibold mb-2">Contact Us</h4>
             <br />
-            <p>Email: info@example.com</p>
-            <p>Phone: 1203-456-7890</p>
+            <p>Email:</p>
+            <p>info@example.com</p>
+            <p>Phone:</p>
+            <p>1203-456-7890</p>
             <div className="flex justify-center my-[10%] gap-[10%]">
               <img src="/icons/facebook.png" alt="" />
               <img src="/icons/instagram.png" alt="" />

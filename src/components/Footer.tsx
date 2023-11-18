@@ -1,12 +1,13 @@
 const Footer = () => {
   return (
     <footer className="bg-slate-800 pb-8 pt-16 mt-[5%]  border-gray-200 text-white">
-      <div className="container mx-auto flex flex-col items-center gap-[30px]">
+      <div className="container mx-auto flex flex-col items-center gap-[3%]">
         <div className="lg:grid lg:grid-cols-3 mb-4 text-center gap-[20%]">
-          <div>
+          <div className="hidden lg:block w-[80%] mx-auto">
             <h4 className="text-2xl font-semibold mb-2 hover:underline cursor-pointer ">
               About Us
             </h4>
+            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt alias laborum corporis eos corrupti perferendis assumenda delectus, placeat, porro vel quod eius ducimus aliquid ab quas veniam modi vitae. Nam.</p>
           </div>
           <div>
             <h4 className="text-2xl font-semibold mb-2">Contact Us</h4>

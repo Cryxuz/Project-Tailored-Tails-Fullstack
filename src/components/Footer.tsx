@@ -7,7 +7,7 @@ const Footer = () => {
             <h4 className="text-2xl font-semibold mb-2 hover:underline cursor-pointer ">
               About Us
             </h4>
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Incidunt alias laborum corporis eos corrupti perferendis assumenda delectus, placeat, porro vel quod eius ducimus aliquid ab quas veniam modi vitae. Nam.</p>
+            <p className="text-md">Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
           </div>
           <div>
             <h4 className="text-2xl font-semibold mb-2">Contact Us</h4>
